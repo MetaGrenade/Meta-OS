@@ -233,4 +233,12 @@ export const apps = [
             import('./components/apps/hacks/SignalJammer.vue')
         ))
     },
+    {
+        id: 'portscanner',
+        name: 'Port Scanner',
+        icon: '/img/icons/apps/hacks/portscanner.png',
+        component: markRaw(defineAsyncComponent(() =>
+            import('./components/apps/hacks/PortScanner.vue')
+        ))
+    },
 ]
