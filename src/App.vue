@@ -35,6 +35,7 @@ function handleTaskToggle(id) {
     <video
       v-if="visible"
       class="desktop-video"
+      preload="none"
       autoplay
       muted
       loop

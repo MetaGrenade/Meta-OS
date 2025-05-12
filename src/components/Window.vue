@@ -3,6 +3,15 @@ import { defineComponent } from 'vue'
 import Vue3DraggableResizable from 'vue3-draggable-resizable'
 import 'vue3-draggable-resizable/dist/Vue3DraggableResizable.css'
 
+// simple debounce helper
+function debounce(fn, ms = 50) {
+  let timer = null
+  return (...args) => {
+    clearTimeout(timer)
+    timer = setTimeout(() => fn(...args), ms)
+  }
+}
+
 export default defineComponent({
   name: 'Window',
   components: { Vue3DraggableResizable },
@@ -17,9 +26,18 @@ export default defineComponent({
     height:    { type: Number, default: 1080 }
   },
   emits: ['close','focus','minimize','update:position','update:size'],
+  created() {
+    // debounce focus so @activated only fires at most once per 50ms
+    this.debouncedFocus = debounce(() => this.$emit('focus'), 50)
+  },
   methods: {
+    // immediate focus on titlebar click
     onFocus() {
       this.$emit('focus')
+    },
+    // debounced focus on drag‐activated
+    onActivated() {
+      this.debouncedFocus()
     },
     onDragStop(left, top) {
       this.$emit('update:position', { x: left, y: top })
@@ -34,7 +52,7 @@ export default defineComponent({
 <template>
   <!-- v-if for minimized windows frees up the drag-listener bindings from Vue3DraggableResizable (performance optimization) -->
   <Vue3DraggableResizable
-    v-if="!minimized" 
+    v-if="!minimized"
     :x="x"
     :y="y"
     :w="width"
@@ -42,10 +60,9 @@ export default defineComponent({
     :draggable="true"
     :resizable="true"
     :parent="true"
-    v-show="!minimized"
     :style="{ zIndex: z }"
     class="window-wrapper"
-    @activated="onFocus"
+    @activated="onActivated"
     @dragstop="onDragStop"
     @resizestop="onResizeStop"
   >
@@ -61,13 +78,8 @@ export default defineComponent({
           <button class="close" @click.stop="$emit('close')">×</button>
         </div>
       </div>
-
       <!-- CONTENT: block all mousedown so drag never starts here -->
-      <div
-        class="content"
-        @mousedown.stop
-        @touchstart.stop
-      >
+      <div class="content" @mousedown.stop @touchstart.stop>
         <slot/>
       </div>
     </div>
