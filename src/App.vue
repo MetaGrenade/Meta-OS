@@ -5,6 +5,7 @@ import Window from './components/Window.vue'
 import Taskbar from './components/Taskbar.vue'
 import { apps } from './apps.js'
 import { useWindowManager } from './composables/useWindowManager'
+import LoadingSpinner from './components/LoadingSpinner.vue'
 
 const visible = ref(true)
 const { state: { windows }, openApp, closeWindow, focusWindow, minimizeWindow, updateWindow } = useWindowManager()
@@ -62,7 +63,14 @@ function handleTaskToggle(id) {
       @update:position="pos => updateWindow(win.id, { x: pos.x, y: pos.y })"
       @update:size="sz => updateWindow(win.id, { x: sz.x, y: sz.y, width: sz.width, height: sz.height })"
     >
-      <component :is="win.component"/>
+      <Suspense>
+        <template #default>
+          <component :is="win.component" />
+        </template>
+        <template #fallback>
+          <LoadingSpinner />
+        </template>
+      </Suspense>
     </Window>
     <Taskbar
       :windows="windows"
@@ -72,12 +80,6 @@ function handleTaskToggle(id) {
 </template>
 
 <style>
-/* .desktop {
-  position: absolute;
-  inset: 0;
-  background: url('/img/wallpaper.webp') center/cover no-repeat;
-} */
-
 .desktop {
   position: absolute;
   inset: 0;
