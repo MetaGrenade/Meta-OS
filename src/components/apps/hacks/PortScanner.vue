@@ -44,12 +44,12 @@
     <div v-if="gameStatus !== 'playing'" class="overlay">
       <div class="message">
         <h2 v-if="gameStatus === 'won'">✅ You’re a Scanner Pro!</h2>
-        <h2 v-else>❌ You Failed</h2>
+        <h2 v-else>❌ Time’s Up!</h2>
         <p v-if="gameStatus === 'won'">
           You found all {{ targets.length }} services.
         </p>
         <p v-else>
-          You didn't find <strong>{{ hotService }}</strong> in time.
+          You failed to find <strong>{{ hotService }}</strong> in time.
         </p>
         <button @click="resetGame">Try Again</button>
       </div>
@@ -64,76 +64,73 @@ import { ref, reactive, onMounted, onUnmounted } from 'vue'
 const startPort       = 20
 const endPort         = 1024
 const additionalPorts = [1433,1521,3306,3389,5900,8080]
-const minTargets      = 3    // minimum services to find each round
-const maxTargets      = 5   // maximum services to find each round
-const hotTimeLimit    = 60   // seconds to find the hot port
+const minTargets      = 3    // min services to find
+const maxTargets      = 3   // max services to find
+const hotTimeLimit    = 60   // seconds for hot port
 
-// --- Port → service map (only ports 20–1024 + extras) ---
+// --- Port → service map (20–1024 + extras) ---
 const portMap = {
-  20: 'FTP Data', 21: 'FTP Control', 22: 'SSH', 23: 'Telnet',
-  25: 'SMTP', 53: 'DNS', 67: 'DHCP Server', 68: 'DHCP Client',
-  69: 'TFTP', 80: 'HTTP', 88: 'Kerberos', 110: 'POP3',
-  119: 'NNTP', 123: 'NTP', 135: 'MS RPC', 137: 'NetBIOS Name',
-  138: 'NetBIOS Datagram', 139: 'NetBIOS Session', 143: 'IMAP',
-  161: 'SNMP', 162: 'SNMP Trap', 389: 'LDAP', 443: 'HTTPS',
-  445: 'SMB', 465: 'SMTPS', 514: 'Syslog', 587: 'SMTP Submission',
-  631: 'IPP', 636: 'LDAPS', 873: 'rsync', 993: 'IMAPS',
-  995: 'POP3S',
-  1433: 'MSSQL', 1521: 'Oracle', 3306: 'MySQL',
-  3389: 'RDP', 5900: 'VNC', 8080: 'HTTP-Alt'
+  20: 'FTP Data',   21: 'FTP Control',  22: 'SSH',           23: 'Telnet',
+  25: 'SMTP',       53: 'DNS',          67: 'DHCP Server',   68: 'DHCP Client',
+  69: 'TFTP',       80: 'HTTP',         88: 'Kerberos',     110: 'POP3',
+ 119: 'NNTP',       123: 'NTP',         135: 'MS RPC',      137: 'NetBIOS Name',
+ 138: 'NetBIOS Datagram', 139: 'NetBIOS Session', 143: 'IMAP',
+ 161: 'SNMP',       162: 'SNMP Trap',    389: 'LDAP',        443: 'HTTPS',
+ 445: 'SMB',        465: 'SMTPS',       514: 'Syslog',      587: 'SMTP Submission',
+ 631: 'IPP',        636: 'LDAPS',        873: 'rsync',       993: 'IMAPS',
+ 995: 'POP3S',     1433: 'MSSQL',       1521: 'Oracle',      3306: 'MySQL',
+ 3389: 'RDP',       5900: 'VNC',         8080: 'HTTP-Alt'
 }
 
-// --- Build full, unique, sorted port list ---
+// Build sorted, unique list of all ports we show
 const allPorts = Array
   .from({ length: endPort - startPort + 1 }, (_, i) => startPort + i)
   .concat(additionalPorts)
   .filter((v,i,a) => a.indexOf(v) === i)
   .sort((a,b) => a - b)
 
-// --- Reactive port entries ---
+// Reactive port entries
 const ports = reactive(
   allPorts.map(port => ({
     port,
-    found: false,
+    found:   false,
     tooltip: portMap[port] || null
   }))
 )
 
-// --- Game state ---
-const targets    = ref([])       // list of service names to find
-const foundSet   = new Set()     // services already found
+// Game state refs
+const targets    = ref([])       // services to find
+const foundSet   = new Set()     // found services
 const foundCount = ref(0)
 const hotService = ref(null)     // current “hot” service
 const timer      = ref(0)
 const gameStatus = ref('playing')// 'playing' | 'won' | 'lost'
 
-// internal interval handle
+// Internal interval
 let hotInterval = null
 
-// --- Helpers ---
-
-// Pick a random number between minTargets and maxTargets (inclusive)
+// Pick a random count between minTargets and maxTargets
 function pickTargetCount() {
+  const totalServices = Object.values(portMap).length
   const range = maxTargets - minTargets + 1
   return Math.min(
-    Object.keys(portMap).length,
+    totalServices,
     Math.floor(Math.random() * range) + minTargets
   )
 }
 
-// Initialize the list of targets to find this round
+// Initialize the list of targets
 function initTargets() {
   const services = Object.values(portMap)
   const count = pickTargetCount()
   const chosen = new Set()
   while (chosen.size < count) {
-    const svc = services[Math.floor(Math.random() * services.length)]
-    chosen.add(svc)
+    chosen.add(services[Math.floor(Math.random() * services.length)])
   }
   targets.value = Array.from(chosen)
 }
 
-// Start a “hot” challenge for one remaining service
+// Trigger a hot challenge
 function triggerHot() {
   const remaining = targets.value.filter(s => !foundSet.has(s))
   if (!remaining.length) return
@@ -152,7 +149,7 @@ function triggerHot() {
 
 // Reset the entire game
 function resetGame() {
-  ports.forEach(p => p.found = false)
+  ports.forEach(p => (p.found = false))
   foundSet.clear()
   foundCount.value = 0
   hotService.value = null
@@ -167,10 +164,10 @@ function scan(entry) {
   if (gameStatus.value !== 'playing') return
   if (!entry.tooltip || entry.found) return
 
-  // No hot active yet?
+  // No hot active?
   if (!hotService.value) {
-    // If it’s a valid target, mark found normally
     if (targets.value.includes(entry.tooltip)) {
+      // normal find
       entry.found = true
       foundSet.add(entry.tooltip)
       foundCount.value++
@@ -178,29 +175,47 @@ function scan(entry) {
         gameStatus.value = 'won'
       }
     } else {
-      // misclick: trigger hot challenge
+      // misclick triggers hot
       triggerHot()
     }
     return
   }
 
-  // Hot is active: only clicking the hotService succeeds
+  // Hot active: must click exactly the hotService
   if (entry.tooltip === hotService.value) {
     entry.found = true
     foundSet.add(entry.tooltip)
     foundCount.value++
     clearInterval(hotInterval)
+
+    // **Replace one of the *other* unfound targets** **
+    // Build candidate services not yet in targets or found
+    const allServices = Object.values(portMap)
+    const used = new Set([...targets.value, ...foundSet])
+    const candidates = allServices.filter(s => !used.has(s))
+
+    if (candidates.length) {
+      const replacement = candidates[Math.floor(Math.random() * candidates.length)]
+      // pick a random index among remaining unfound services *excluding* the just-found one
+      const unfoundIdxs = targets.value
+        .map((svc, idx) => (!foundSet.has(svc) ? idx : -1))
+        .filter(idx => idx !== -1)
+      if (unfoundIdxs.length) {
+        const idxToReplace = unfoundIdxs[Math.floor(Math.random() * unfoundIdxs.length)]
+        targets.value.splice(idxToReplace, 1, replacement)
+      }
+    }
+
     hotService.value = null
-    // Shuffle the remaining targets to change order
-    const rem = targets.value.filter(s => !foundSet.has(s))
-    targets.value = rem.sort(() => Math.random() - 0.5)
-    if (foundCount.value === targets.value.length + foundCount.value) {
+    timer.value = 0
+
+    if (foundCount.value === targets.value.length) {
       gameStatus.value = 'won'
     }
   }
 }
 
-// Lifecycle hooks
+// Lifecycle
 onMounted(resetGame)
 onUnmounted(() => clearInterval(hotInterval))
 </script>
@@ -293,7 +308,7 @@ onUnmounted(() => clearInterval(hotInterval))
   background: #27ae60;
   color: #fff;
 }
-/* Tooltip for ports with data-service */
+/* Tooltip */
 .ps-port[data-service]:hover::after {
   content: attr(data-service);
   position: absolute;
