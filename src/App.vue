@@ -1,11 +1,11 @@
 <script setup>
 import { ref } from 'vue'
-import DesktopGrid from './components/DesktopGrid.vue'
-import Window from './components/Window.vue'
-import Taskbar from './components/Taskbar.vue'
-import { apps } from './apps.js'
-import { useWindowManager } from './composables/useWindowManager'
-import LoadingSpinner from './components/LoadingSpinner.vue'
+import DesktopGrid from '@/components/DesktopGrid.vue'
+import Window from '@/components/Window.vue'
+import Taskbar from '@/components/Taskbar.vue'
+import { apps } from '@/apps.js'
+import { useWindowManager } from '@/composables/useWindowManager'
+import LoadingSpinner from '@/components/LoadingSpinner.vue'
 
 const visible = ref(true)
 const { state: { windows }, openApp, closeWindow, focusWindow, minimizeWindow, updateWindow } = useWindowManager()

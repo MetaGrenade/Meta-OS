@@ -58,28 +58,29 @@
 </template>
 
 <script setup>
-import { ref, reactive, onMounted, onUnmounted } from 'vue'
+import { ref, reactive, onMounted, watch } from 'vue'
+import { useTick } from '../composables/useTick'  // relative path
 
 // --- Configurable settings ---
 const startPort       = 20
 const endPort         = 1024
 const additionalPorts = [1433,1521,3306,3389,5900,8080]
-const minTargets      = 3    // min services to find
-const maxTargets      = 3   // max services to find
+const minTargets      = 10    // min services to find
+const maxTargets      = 15    // max services to find
 const hotTimeLimit    = 60   // seconds for hot port
 
 // --- Port → service map (20–1024 + extras) ---
 const portMap = {
-  20: 'FTP Data',   21: 'FTP Control',  22: 'SSH',           23: 'Telnet',
-  25: 'SMTP',       53: 'DNS',          67: 'DHCP Server',   68: 'DHCP Client',
-  69: 'TFTP',       80: 'HTTP',         88: 'Kerberos',     110: 'POP3',
- 119: 'NNTP',       123: 'NTP',         135: 'MS RPC',      137: 'NetBIOS Name',
- 138: 'NetBIOS Datagram', 139: 'NetBIOS Session', 143: 'IMAP',
- 161: 'SNMP',       162: 'SNMP Trap',    389: 'LDAP',        443: 'HTTPS',
- 445: 'SMB',        465: 'SMTPS',       514: 'Syslog',      587: 'SMTP Submission',
- 631: 'IPP',        636: 'LDAPS',        873: 'rsync',       993: 'IMAPS',
- 995: 'POP3S',     1433: 'MSSQL',       1521: 'Oracle',      3306: 'MySQL',
- 3389: 'RDP',       5900: 'VNC',         8080: 'HTTP-Alt'
+  20: 'FTP Data', 21: 'FTP Control', 22: 'SSH', 23: 'Telnet',
+  25: 'SMTP', 53: 'DNS', 67: 'DHCP Server', 68: 'DHCP Client',
+  69: 'TFTP', 80: 'HTTP', 88: 'Kerberos', 110: 'POP3',
+  119: 'NNTP', 123: 'NTP', 135: 'MS RPC', 137: 'NetBIOS Name',
+  138: 'NetBIOS Datagram', 139: 'NetBIOS Session', 143: 'IMAP',
+  161: 'SNMP', 162: 'SNMP Trap', 389: 'LDAP', 443: 'HTTPS',
+  445: 'SMB', 465: 'SMTPS', 514: 'Syslog', 587: 'SMTP Submission',
+  631: 'IPP', 636: 'LDAPS', 873: 'rsync', 993: 'IMAPS',
+  995: 'POP3S', 1433: 'MSSQL', 1521: 'Oracle',
+  3306: 'MySQL', 3389: 'RDP', 5900: 'VNC', 8080: 'HTTP-Alt'
 }
 
 // Build sorted, unique list of all ports we show
@@ -106,8 +107,18 @@ const hotService = ref(null)     // current “hot” service
 const timer      = ref(0)
 const gameStatus = ref('playing')// 'playing' | 'won' | 'lost'
 
-// Internal interval
-let hotInterval = null
+// --- replace manual interval with our composable tick
+const tick = useTick(1000)
+
+// decrement `timer` on each tick when a hot challenge is active
+watch(tick, () => {
+  if (hotService.value && gameStatus.value === 'playing') {
+    timer.value--
+    if (timer.value <= 0) {
+      gameStatus.value = 'lost'
+    }
+  }
+})
 
 // Pick a random count between minTargets and maxTargets
 function pickTargetCount() {
@@ -130,21 +141,12 @@ function initTargets() {
   targets.value = Array.from(chosen)
 }
 
-// Trigger a hot challenge
+// Trigger a hot challenge (just sets `hotService` and `timer`)
 function triggerHot() {
   const remaining = targets.value.filter(s => !foundSet.has(s))
   if (!remaining.length) return
   hotService.value = remaining[Math.floor(Math.random() * remaining.length)]
   timer.value = hotTimeLimit
-
-  clearInterval(hotInterval)
-  hotInterval = setInterval(() => {
-    timer.value--
-    if (timer.value <= 0) {
-      clearInterval(hotInterval)
-      gameStatus.value = 'lost'
-    }
-  }, 1000)
 }
 
 // Reset the entire game
@@ -155,7 +157,6 @@ function resetGame() {
   hotService.value = null
   timer.value = 0
   gameStatus.value = 'playing'
-  clearInterval(hotInterval)
   initTargets()
 }
 
@@ -164,7 +165,7 @@ function scan(entry) {
   if (gameStatus.value !== 'playing') return
   if (!entry.tooltip || entry.found) return
 
-  // No hot active?
+  // No hot active yet?
   if (!hotService.value) {
     if (targets.value.includes(entry.tooltip)) {
       // normal find
@@ -181,31 +182,30 @@ function scan(entry) {
     return
   }
 
-  // Hot active: must click exactly the hotService
+  // Hot is active: must click exactly the hotService
   if (entry.tooltip === hotService.value) {
     entry.found = true
     foundSet.add(entry.tooltip)
     foundCount.value++
-    clearInterval(hotInterval)
 
-    // **Replace one of the *other* unfound targets** **
-    // Build candidate services not yet in targets or found
+    // Replace one *other* unfound target
     const allServices = Object.values(portMap)
     const used = new Set([...targets.value, ...foundSet])
     const candidates = allServices.filter(s => !used.has(s))
-
     if (candidates.length) {
-      const replacement = candidates[Math.floor(Math.random() * candidates.length)]
-      // pick a random index among remaining unfound services *excluding* the just-found one
+      const replacement =
+        candidates[Math.floor(Math.random() * candidates.length)]
       const unfoundIdxs = targets.value
         .map((svc, idx) => (!foundSet.has(svc) ? idx : -1))
         .filter(idx => idx !== -1)
       if (unfoundIdxs.length) {
-        const idxToReplace = unfoundIdxs[Math.floor(Math.random() * unfoundIdxs.length)]
+        const idxToReplace =
+          unfoundIdxs[Math.floor(Math.random() * unfoundIdxs.length)]
         targets.value.splice(idxToReplace, 1, replacement)
       }
     }
 
+    // clear hot state
     hotService.value = null
     timer.value = 0
 
@@ -217,7 +217,6 @@ function scan(entry) {
 
 // Lifecycle
 onMounted(resetGame)
-onUnmounted(() => clearInterval(hotInterval))
 </script>
 
 <style scoped>

@@ -1,5 +1,6 @@
 <script setup>
-import { ref, onMounted, onUnmounted, defineProps, defineEmits } from 'vue'
+import { ref, watch, onMounted, onUnmounted, defineProps, defineEmits } from 'vue'
+import { useTick } from '@/composables/useTick'
 
 const props = defineProps({
   windows: {
@@ -11,8 +12,7 @@ const emit = defineEmits(['taskToggle'])
 
 const startMenuOpen = ref(false)
 const clock = ref('')
-
-let intervalId = null
+const tick = useTick(1000) // grab a ticking ref at 1-second intervals
 
 // emit toggle for windows
 function handleClick(win) {
@@ -38,19 +38,15 @@ function onClickOutside(e) {
 
 onMounted(() => {
   document.addEventListener('click', onClickOutside)
-  function updateClock() {
-    const now = new Date()
+  watch(tick, () => {
+    const now  = new Date()
     const time = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
     const date = now.toLocaleDateString([], { weekday: 'short', month: 'short', day: 'numeric' })
     clock.value = `${time}  ${date}`
-  }
-  updateClock()
-  intervalId = setInterval(updateClock, 1000)
+  }, { immediate: true })
 })
 onUnmounted(() => {
   document.removeEventListener('click', onClickOutside)
-  clearInterval(intervalId)
-  intervalId = null
 })
 </script>
 
