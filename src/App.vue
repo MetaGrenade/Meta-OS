@@ -33,18 +33,6 @@ function handleTaskToggle(id) {
 
 <template>
   <div class="desktop" v-show="visible">
-    <video
-      v-if="visible"
-      class="desktop-video"
-      preload="none"
-      autoplay
-      muted
-      loop
-      playsinline
-    >
-      <source src="/vid/bg_1k.webm" type="video/webm" />
-    </video>
-
     <DesktopGrid v-if="visible" @launch="handleLaunch"/>
     <Window
       v-for="win in windows"
@@ -84,18 +72,8 @@ function handleTaskToggle(id) {
   position: absolute;
   inset: 0;
   overflow: hidden; /* ensure video doesn’t spill */
-}
-/* Video full-screen behind everything */
-.desktop-video {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: auto;
-  height: 100%;
-  min-width: 100%;
-  min-height: 100%;
-  transform: translate(-50%, -50%);
-  object-fit: cover;
-  z-index: -1;
+  background: url('/img/backgrounds/MetaOS-Grunge.png') no-repeat center center fixed;
+  background-size: cover;
+  z-index: 0;
 }
 </style>

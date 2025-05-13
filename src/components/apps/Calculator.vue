@@ -1,7 +1,10 @@
 <script setup>
 import { ref } from 'vue'
+import { Parser } from 'expr-eval'
 
 const expression = ref('')
+// create a single parser instance
+const parser = new Parser()
 
 function append(char) {
   // Prevent invalid leading operators
@@ -15,15 +18,14 @@ function clear() {
 
 function calculate() {
   try {
-    // Evaluate only digits, operators, and parens
-    // (In a real app you’d want a proper parser)
     // Replace ÷/× with JS operators
     const safeExpr = expression.value
       .replace(/÷/g, '/')
       .replace(/×/g, '*')
-    // eslint-disable-next-line no-eval
-    const result = eval(safeExpr)
-    expression.value = result.toString()
+
+    // parse & evaluate via expr-eval
+    const result = parser.evaluate(safeExpr)
+    expression.value = String(result)
   } catch {
     expression.value = 'Error'
   }
