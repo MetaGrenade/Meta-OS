@@ -40,60 +40,65 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue'
+import { ref, onMounted, watch } from 'vue'
+import { useTick } from '@/composables/useTick'  // adjust path as needed
 
+// --- Game State ---
 const gameState   = ref('start')   // 'start' | 'playing' | 'ended'
 const timer       = ref(60)
 const score       = ref(0)
 const playerName  = ref('')
 const leaderboard = ref([])
 
-let intervalId = null
-
-// load existing leaderboard from localStorage TODO: use a proper API
+// load existing leaderboard from localStorage
 onMounted(() => {
   const data = localStorage.getItem('donutDashLeaderboard')
   if (data) leaderboard.value = JSON.parse(data)
 })
 
-// start the 60s game
-function startGame() {
-  score.value = 0
-  timer.value = 60
-  gameState.value = 'playing'
-  intervalId = setInterval(() => {
+// reusable tick every second
+const tick = useTick(1000)
+
+// each tick, if we're playing, count down
+watch(tick, () => {
+  if (gameState.value === 'playing') {
     timer.value--
-    if (timer.value <= 0) endGame()
-  }, 1000)
+    if (timer.value <= 0) {
+      endGame()
+    }
+  }
+})
+
+function startGame() {
+  score.value      = 0
+  timer.value      = 60
+  gameState.value  = 'playing'
 }
 
-// record a click
 function clickDonut() {
   if (gameState.value === 'playing') {
     score.value++
   }
 }
 
-// finish the game
 function endGame() {
-  clearInterval(intervalId)
-  intervalId = null
   gameState.value = 'ended'
 }
 
-// save score to leaderboard
 function saveScore() {
   const name = playerName.value.trim() || 'Anonymous'
   leaderboard.value.push({ name, score: score.value })
   leaderboard.value.sort((a, b) => b.score - a.score)
   leaderboard.value.splice(10) // keep top 10
-  localStorage.setItem('donutDashLeaderboard', JSON.stringify(leaderboard.value))
+  localStorage.setItem(
+    'donutDashLeaderboard',
+    JSON.stringify(leaderboard.value)
+  )
 }
 
-// reset to start
 function resetGame() {
   playerName.value = ''
-  gameState.value = 'start'
+  gameState.value  = 'start'
 }
 </script>
 

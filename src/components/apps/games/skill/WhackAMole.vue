@@ -33,18 +33,33 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted, watch } from 'vue'
+import { useTick } from '@/composables/useTick'  // adjust path if needed
 
+// reactive state
 const score      = ref(0)
 const timeLeft   = ref(30)
 const activeHole = ref(null)
 const gameOver   = ref(false)
 
+// interval for mole pop-ups remains manual
 let popInterval = null
-let timerInterval = null
 
+// 1s heartbeat
+const tick = useTick(1000)
+
+// on each second tick, if the game is running, decrement timer
+watch(tick, () => {
+  if (!gameOver.value) {
+    timeLeft.value--
+    if (timeLeft.value <= 0) {
+      endGame()
+    }
+  }
+})
+
+// choose a random hole 0–8
 function popUp() {
-  // choose a random hole 0–8
   activeHole.value = Math.floor(Math.random() * 9)
 }
 
@@ -56,43 +71,31 @@ function whack(idx) {
   }
 }
 
-function tick() {
-  timeLeft.value--
-  if (timeLeft.value <= 0) {
-    endGame()
-  }
+function endGame() {
+  gameOver.value = true
+  clearInterval(popInterval)
+  activeHole.value = null
 }
 
 function startGame() {
   // reset state
-  score.value = 0
-  timeLeft.value = 30
-  gameOver.value = false
+  score.value      = 0
+  timeLeft.value   = 30
+  gameOver.value   = false
   activeHole.value = null
 
-  // clear any existing intervals
+  // clear any existing pop-up timer
   clearInterval(popInterval)
-  clearInterval(timerInterval)
 
-  // start pop-ups every 800ms
+  // start mole pop-ups every 800 ms
   popUp()
   popInterval = setInterval(popUp, 800)
-
-  // start countdown
-  timerInterval = setInterval(tick, 1000)
 }
 
-function endGame() {
-  gameOver.value = true
-  clearInterval(popInterval)
-  clearInterval(timerInterval)
-  activeHole.value = null
-}
-
+// mount / unmount
 onMounted(startGame)
 onUnmounted(() => {
   clearInterval(popInterval)
-  clearInterval(timerInterval)
 })
 </script>
 

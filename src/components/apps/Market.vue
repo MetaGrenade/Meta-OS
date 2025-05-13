@@ -46,28 +46,41 @@
       <h2>Start an Auction</h2>
       <form class="post-form" @submit.prevent="postAuction">
         <input v-model="aucTitle" placeholder="Title" required />
-        <input v-model="aucStartBid" type="number" min="0" placeholder="Starting Bid" required />
-        <input v-model="aucDuration" type="number" min="1" placeholder="Duration (min)" required />
-        <textarea v-model="aucDesc" placeholder="Description" required></textarea>
+        <input
+          v-model.number="aucStartBid"
+          type="number"
+          min="0"
+          placeholder="Starting Bid"
+          required
+        />
+        <input
+          v-model.number="aucDuration"
+          type="number"
+          min="1"
+          placeholder="Duration (min)"
+          required
+        />
+        <textarea v-model="aucDesc" placeholder="Description" required />
         <button type="submit">Create Auction</button>
       </form>
 
       <h2>Ongoing Auctions</h2>
       <div class="listings">
         <div
-          v-for="auc in auctionItems"
+          v-for="auc in liveAuctions"
           :key="auc.id"
           class="card"
-          :class="{ ended: timeRemaining(auc) === '00:00:00' }"
+          :class="{ ended: auc.remaining === '00:00:00' }"
         >
           <h3>{{ auc.title }}</h3>
           <p class="desc">{{ auc.description }}</p>
           <div class="meta">
             <span>Seller: {{ auc.seller }}</span>
             <span>Current Bid: ${{ auc.currentBid }}</span>
-            <span>Ends In: {{ timeRemaining(auc) }}</span>
+            <span>Ends In: {{ auc.remaining }}</span>
           </div>
-          <div class="bid-row" v-if="timeRemaining(auc) !== '00:00:00'">
+
+          <div v-if="auc.remaining !== '00:00:00'" class="bid-row">
             <input
               v-model.number="auc.bidAmount"
               type="number"
@@ -75,10 +88,11 @@
               placeholder="Your Bid"
             />
             <button
-              @click="placeBid(auc.id)"
+              @click="placeBid(auc.id, auc.bidAmount)"
               :disabled="!auc.bidAmount || auc.bidAmount <= auc.currentBid"
             >Bid</button>
           </div>
+
           <div v-else class="ended-label">Auction ended</div>
         </div>
       </div>
@@ -106,13 +120,14 @@
 </template>
 
 <script setup>
-import { ref, reactive, onMounted, onUnmounted } from 'vue'
+import { ref, reactive, computed } from 'vue'
+import { useTick } from '@/composables/useTick'
 
 // Tabs
 const tabs = ['For Sale','Auctions','Wanted']
-const tab  = ref('For Sale')
+const tab  = ref('Auctions')
 
-// --- For Sale ---
+// --- For Sale state ---
 const salesItems = reactive([])
 let saleId = 1
 const saleTitle = ref('')
@@ -134,17 +149,17 @@ function postSale() {
 }
 
 function buyItem(id) {
-  const itm = salesItems.find(i=>i.id===id)
+  const itm = salesItems.find(i => i.id === id)
   if (itm) itm.sold = true
 }
 
-// --- Auctions ---
+// --- Auctions state ---
 const auctionItems = reactive([])
-let auctionId = 1
-const aucTitle    = ref('')
-const aucStartBid = ref(0)
-const aucDuration = ref(1)  // minutes
-const aucDesc     = ref('')
+let auctionId      = 1
+const aucTitle     = ref('')
+const aucStartBid  = ref(0)
+const aucDuration  = ref(1)  // minutes
+const aucDesc      = ref('')
 
 function postAuction() {
   const now = Date.now()
@@ -157,55 +172,56 @@ function postAuction() {
     bidAmount:    null,
     endTime:      now + aucDuration.value * 60000
   })
-  aucTitle.value = ''
+  aucTitle.value    = ''
   aucStartBid.value = 0
   aucDuration.value = 1
-  aucDesc.value = ''
+  aucDesc.value     = ''
 }
 
-// return HH:MM:SS until auction.endTime
-function timeRemaining(auc) {
-  const diff = Math.max(0, auc.endTime - Date.now()) / 1000
-  const h = String(Math.floor(diff/3600)).padStart(2,'0')
-  const m = String(Math.floor((diff%3600)/60)).padStart(2,'0')
-  const s = String(Math.floor(diff%60)).padStart(2,'0')
-  return `${h}:${m}:${s}`
-}
-
-function placeBid(id) {
-  const auc = auctionItems.find(a=>a.id===id)
-  if (auc && auc.bidAmount > auc.currentBid && timeRemaining(auc) !== '00:00:00') {
-    auc.currentBid = auc.bidAmount
-    auc.bidAmount = null
+function placeBid(id, amount) {
+  const auc = auctionItems.find(a => a.id === id)
+  if (auc && amount > auc.currentBid) {
+    auc.currentBid = amount
+    auc.bidAmount  = null
   }
 }
 
-// keep auctions ticking so timeRemaining updates
-let tick
-onMounted(() => {
-  tick = setInterval(() => {
-    // force reactivity
-    auctionItems.forEach(a=>a.endTime=a.endTime)
-  }, 1000)
-})
-onUnmounted(() => clearInterval(tick))
-
-// --- Wanted Ads ---
+// --- Wanted Ads state ---
 const wantedPosts = reactive([])
-let wantId = 1
-const wantTitle = ref('')
-const wantDesc  = ref('')
+let wantId        = 1
+const wantTitle   = ref('')
+const wantDesc    = ref('')
 
 function postWanted() {
   wantedPosts.push({
-    id: wantId++,
-    title: wantTitle.value,
+    id:          wantId++,
+    title:       wantTitle.value,
     description: wantDesc.value,
-    seeker: 'You'
+    seeker:      'You'
   })
   wantTitle.value = ''
-  wantDesc.value = ''
+  wantDesc.value  = ''
 }
+
+// Reactive “heartbeat” every second
+const tick = useTick(1000)
+
+// Build liveAuctions so each tick re-computes remaining time
+const liveAuctions = computed(() => {
+  // touch tick to trigger recompute each second
+  tick.value
+
+  return auctionItems.map(auc => {
+    const diffSec = Math.max(0, auc.endTime - Date.now()) / 1000
+    const h = String(Math.floor(diffSec / 3600)).padStart(2, '0')
+    const m = String(Math.floor((diffSec % 3600) / 60)).padStart(2, '0')
+    const s = String(Math.floor(diffSec % 60)).padStart(2, '0')
+    return {
+      ...auc,
+      remaining: `${h}:${m}:${s}`
+    }
+  })
+})
 </script>
 
 <style scoped>

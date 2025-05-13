@@ -121,57 +121,51 @@
 </template>
 
 <script setup>
-import { ref, reactive, computed, onMounted, onUnmounted } from 'vue'
+import { ref, reactive, computed, watch } from 'vue'
+import { useTick } from '@/composables/useTick'   // relative path to your hook
 
-// GPU Catalog
+// --- GPU Catalog ---
 const gpuCatalog = [
   { id: 1, name: 'NERDIA XTR 39000', hashRate: 120, power: 350, temp: 65 },
   { id: 2, name: 'GTX Ultra 690',      hashRate: 80,  power: 250, temp: 60 },
   { id: 3, name: 'AMD Fury Pro',       hashRate: 100, power: 300, temp: 70 }
 ]
 
-// Pool Options
+// --- Pool & Coin Options ---
 const pools = [
   { id: 'poolA', name: 'OceanPool',  networkHash: 10000 },
   { id: 'poolB', name: 'DesertPool', networkHash: 5000  }
 ]
-
-// Coin Options
 const coins = [
   { id: 'coinA', name: 'Coin Alpha', ratePerMH: (1/86400)/120 },
   { id: 'coinB', name: 'Coin Beta',  ratePerMH: (1/43200)/120 }
 ]
 
-// Rig state
+// --- Reactive state ---
 const rigGPUs          = reactive([])
-let nextInstanceId    = 1
+let   nextInstanceId  = 1
 const newGpuId        = ref('')
 const globalOverclock = ref(0)
 
-// Market state
-const selectedCoin = ref(coins.length ? coins[0].id : '')
-const selectedPool = ref(pools.length ? pools[0].id : '')
+const selectedCoin = ref(coins[0]?.id || '')
+const selectedPool = ref(pools[0]?.id || '')
 
-// Balances & session timer
 const cryptoBalance  = ref(0)
 const walletBalance  = ref(0)
 const sessionSeconds = ref(0)
 
-let mineInterval, sessionInterval
-onMounted(() => {
-  mineInterval = setInterval(() => {
-    cryptoBalance.value += miningRate.value
-  }, 1000)
-  sessionInterval = setInterval(() => {
-    sessionSeconds.value++
-  }, 1000)
-})
-onUnmounted(() => {
-  clearInterval(mineInterval)
-  clearInterval(sessionInterval)
+// --- replace intervals with a single tick ---
+const tick = useTick(1000)
+
+// on each tick:
+// 1) mine new coins
+// 2) advance session timer
+watch(tick, () => {
+  cryptoBalance.value += miningRate.value
+  sessionSeconds.value++
 })
 
-// Rig computations
+// --- Rig computations ---
 const totalHashRate = computed(() =>
   rigGPUs.reduce((sum, g) => sum + g.hashRate, 0)
 )
@@ -190,7 +184,7 @@ const effectivePower = computed(() =>
   totalPower.value * (1 + globalOverclock.value/100)
 )
 
-// Market computations
+// --- Market computations ---
 const currentCoin = computed(() =>
   coins.find(c => c.id === selectedCoin.value) || { ratePerMH: 0 }
 )
@@ -201,20 +195,17 @@ const miningRate = computed(() =>
   effectiveHashRate.value * currentCoin.value.ratePerMH
 )
 const poolShare = computed(() =>
-  effectiveHashRate.value / currentPool.value.networkHash * 100
+  (effectiveHashRate.value / currentPool.value.networkHash) * 100
 )
 
-// Coin progress
+// --- Progress & timing ---
 const coinProgress = computed(() => cryptoBalance.value % 1)
 
-// Time formatting
-const pad = n => String(n).padStart(2, '0')
+const pad = n => String(n).padStart(2,'0')
 const estimatedTime = computed(() => {
   if (miningRate.value <= 0) return '∞'
   const secs = 1 / miningRate.value
-  const h = Math.floor(secs/3600)
-  const m = Math.floor((secs%3600)/60)
-  const s = Math.floor(secs%60)
+  const h = Math.floor(secs/3600), m = Math.floor((secs%3600)/60), s = Math.floor(secs%60)
   return `${pad(h)}:${pad(m)}:${pad(s)}`
 })
 const sessionTime = computed(() => {
@@ -224,23 +215,23 @@ const sessionTime = computed(() => {
   return `${pad(h)}:${pad(m)}:${pad(s)}`
 })
 
-// Fan rotation speed: 0°C→5s, 100°C→0.5s
+// --- Fan animation speed ---
 const rotationDuration = computed(() => {
   const t = avgTemp.value
   const dur = 5 - (t/100)*4.5
   return `${dur.toFixed(2)}s`
 })
 
-// Actions
+// --- Actions ---
 function addGPU() {
   const def = gpuCatalog.find(g => g.id === newGpuId.value)
   if (!def) return
   rigGPUs.push({ ...def, instanceId: nextInstanceId++ })
   newGpuId.value = ''
 }
-function removeGPU(instanceId) {
-  const i = rigGPUs.findIndex(g => g.instanceId === instanceId)
-  if (i !== -1) rigGPUs.splice(i,1)
+function removeGPU(id) {
+  const idx = rigGPUs.findIndex(g => g.instanceId === id)
+  if (idx !== -1) rigGPUs.splice(idx, 1)
 }
 function transfer() {
   walletBalance.value += cryptoBalance.value

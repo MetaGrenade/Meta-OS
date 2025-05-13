@@ -56,92 +56,97 @@
 </template>
 
 <script setup>
-import { reactive, ref, onMounted, onUnmounted } from 'vue'
+import { reactive, ref, onMounted, watch } from 'vue'
+import { useTick } from '@/composables/useTick'  // adjust path as needed
 
-const SIZE = 5           // 5×5 grid
+// grid size
+const SIZE = 5
+
+// reactive board array
 const board = reactive([])
 
-// Game state
+// player position
 const current = reactive({ r: 0, c: 0 })
+
+// game state
 const timeLeft = ref(60)
 const gameOver = ref(false)
 const won      = ref(false)
 
-let timerId = null
+// tick every second
+const tick = useTick(1000)
 
-// Initialize or reset the board
-function resetGame() {
-  // Clear state
-  board.length = 0
-  timeLeft.value = 60
-  gameOver.value = false
-  won.value      = false
-  current.r = 0
-  current.c = 0
-
-  // Build grid
-  for (let r = 0; r < SIZE; r++) {
-    const row = []
-    for (let c = 0; c < SIZE; c++) {
-      // Start and target are always normal
-      let type = 'normal'
-      if (r === SIZE-1 && c === SIZE-1) type = 'target'
-      // Random firewalls everywhere else except start
-      else if (!(r===0&&c===0) && Math.random() < 0.15) type = 'firewall'
-      row.push({ type, unlocked: r===0&&c===0 })
-    }
-    board.push(row)
-  }
-
-  // Start countdown
-  clearInterval(timerId)
-  timerId = setInterval(() => {
+// on each tick, if still playing, decrement timer
+watch(tick, () => {
+  if (!gameOver.value && !won.value) {
     timeLeft.value--
     if (timeLeft.value <= 0) {
       gameOver.value = true
-      clearInterval(timerId)
     }
-  }, 1000)
+  }
+})
+
+// initialize or reset the entire game
+function resetGame() {
+  // clear board
+  board.length = 0
+  timeLeft.value = 60
+  gameOver.value = false
+  won.value = false
+  current.r = 0
+  current.c = 0
+
+  // build new 5×5 grid
+  for (let r = 0; r < SIZE; r++) {
+    const row = []
+    for (let c = 0; c < SIZE; c++) {
+      let type = 'normal'
+      if (r === SIZE - 1 && c === SIZE - 1) {
+        type = 'target'
+      } else if (!(r === 0 && c === 0) && Math.random() < 0.15) {
+        type = 'firewall'
+      }
+      row.push({ type, unlocked: r === 0 && c === 0 })
+    }
+    board.push(row)
+  }
 }
 
-// Handle clicks on nodes
+// handle clicking a node
 function handleClick(r, c) {
   if (gameOver.value || won.value) return
 
-  // Must click an adjacent node
+  // only adjacent moves allowed
   const dr = Math.abs(r - current.r)
   const dc = Math.abs(c - current.c)
   if (dr + dc !== 1) return
 
   const node = board[r][c]
 
-  // Hitting a firewall = game over
+  // firewall = immediate loss
   if (node.type === 'firewall') {
     gameOver.value = true
-    clearInterval(timerId)
     return
   }
 
-  // If locked, exploit (unlock) first
+  // if locked, unlock first
   if (!node.unlocked) {
     node.unlocked = true
     return
   }
 
-  // If unlocked, move into it
+  // move into the node
   current.r = r
   current.c = c
 
-  // Check for target
+  // check success
   if (node.type === 'target') {
     won.value = true
-    clearInterval(timerId)
   }
 }
 
-// Lifecycle
+// start the first game on mount
 onMounted(resetGame)
-onUnmounted(() => clearInterval(timerId))
 </script>
 
 <style scoped>
