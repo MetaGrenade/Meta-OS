@@ -43,8 +43,8 @@
     <!-- Win/Lose Overlay -->
     <div v-if="gameStatus !== 'playing'" class="overlay">
       <div class="message">
-        <h2 v-if="gameStatus === 'won'">✅ You’re a Scanner Pro!</h2>
-        <h2 v-else>❌ Time’s Up!</h2>
+        <h2 v-if="gameStatus === 'won'">✅ You’ve found an attack vector!</h2>
+        <h2 v-else>❌ Time’s Up! The firewall was triggered and closed the ports...</h2>
         <p v-if="gameStatus === 'won'">
           You found all {{ targets.length }} services.
         </p>
