@@ -59,7 +59,7 @@
 
 <script setup>
 import { ref, reactive, onMounted, watch } from 'vue'
-import { useTick } from '../composables/useTick'  // relative path
+import { useTick } from '@/composables/useTick'  // relative path
 
 // --- Configurable settings ---
 const startPort       = 20
