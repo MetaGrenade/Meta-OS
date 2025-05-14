@@ -3,12 +3,32 @@ import { defineComponent } from 'vue'
 import Vue3DraggableResizable from 'vue3-draggable-resizable'
 import 'vue3-draggable-resizable/dist/Vue3DraggableResizable.css'
 
-// simple debounce helper
+// simple debounce helper (you already had)
 function debounce(fn, ms = 50) {
   let timer = null
   return (...args) => {
     clearTimeout(timer)
     timer = setTimeout(() => fn(...args), ms)
+  }
+}
+
+// lightweight throttle: calls fn at most once per `ms`, with a trailing call
+function throttle(fn, ms = 50) {
+  let last = 0
+  let timer = null
+  return (...args) => {
+    const now = Date.now()
+    const delta = now - last
+    if (delta >= ms) {
+      last = now
+      fn(...args)
+    } else {
+      clearTimeout(timer)
+      timer = setTimeout(() => {
+        last = Date.now()
+        fn(...args)
+      }, ms - delta)
+    }
   }
 }
 
@@ -27,23 +47,41 @@ export default defineComponent({
   },
   emits: ['close','focus','minimize','update:position','update:size'],
   created() {
-    // debounce focus so @activated only fires at most once per 50ms
+    // debounce focus so it won't spam when you drag-click rapidly
     this.debouncedFocus = debounce(() => this.$emit('focus'), 50)
+
+    // throttle continuous drag updates to once every 50ms
+    this.throttledDrag = throttle((l, t) =>
+      this.$emit('update:position', { x: l, y: t }), 50)
+
+    // throttle continuous resize updates to once every 50ms
+    this.throttledResize = throttle((l, t, w, h) =>
+      this.$emit('update:size', { x: l, y: t, width: w, height: h }), 50)
   },
   methods: {
-    // immediate focus on titlebar click
+    // immediate focus when clicking titlebar
     onFocus() {
       this.$emit('focus')
     },
-    // debounced focus on drag‐activated
+    // debounced focus when draggable library emits "activated"
     onActivated() {
       this.debouncedFocus()
     },
+    // continuous drag – throttled
+    onDrag(left, top) {
+      this.throttledDrag(left, top)
+    },
+    // final drag end – immediate
     onDragStop(left, top) {
       this.$emit('update:position', { x: left, y: top })
     },
-    onResizeStop(left, top, w, h) {
-      this.$emit('update:size', { x: left, y: top, width: w, height: h })
+    // continuous resize – throttled
+    onResize(left, top, width, height) {
+      this.throttledResize(left, top, width, height)
+    },
+    // final resize end – immediate
+    onResizeStop(left, top, width, height) {
+      this.$emit('update:size', { x: left, y: top, width, height })
     }
   }
 })
@@ -63,7 +101,9 @@ export default defineComponent({
     :style="{ zIndex: z }"
     class="window-wrapper"
     @activated="onActivated"
+    @drag="onDrag"
     @dragstop="onDragStop"
+    @resizing="onResize"
     @resizestop="onResizeStop"
   >
     <div class="window-content">
