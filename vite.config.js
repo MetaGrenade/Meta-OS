@@ -12,7 +12,7 @@ export default defineConfig({
     }
   },
   build: {
-    outDir: '../resources/desktop_ui/html',
+    outDir: '../resources/meta-os/ui',
     emptyOutDir: true,
   }
 })
