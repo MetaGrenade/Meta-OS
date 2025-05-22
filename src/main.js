@@ -6,9 +6,9 @@ const app = createApp(App)
 
 // expose an API so we can open from the window listener
 // (we’ll implement openDesktop in App.vue)
-app.config.globalProperties.$openDesktop = () => {
-  app._component.proxy.openDesktop()
-}
+// app.config.globalProperties.$openDesktop = () => {
+//   app._component.proxy.openDesktop()
+// }
 
 app.mount('#app')
 
@@ -16,8 +16,8 @@ app.mount('#app')
 function setUIVisible(on) {
   const disp = on ? 'flex' : 'none'
   document.documentElement.style.display = disp
-  document.body.style.display         = disp
-  app.config.globalProperties.$openDesktop()
+  document.body.style.display = disp
+  // app.config.globalProperties.$openDesktop()
 }
 
 // NUI messages from Lua

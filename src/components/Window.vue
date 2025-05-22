@@ -45,7 +45,7 @@ export default defineComponent({
     width:     { type: Number, default: 1920 },
     height:    { type: Number, default: 1080 }
   },
-  emits: ['close','focus','minimize','update:position','update:size'],
+  emits: ['close','focus','minimize','update:position'], //,'update:size'
   created() {
     // debounce focus so it won't spam when you drag-click rapidly
     this.debouncedFocus = debounce(() => this.$emit('focus'), 50)
@@ -55,8 +55,8 @@ export default defineComponent({
       this.$emit('update:position', { x: l, y: t }), 50)
 
     // throttle continuous resize updates to once every 50ms
-    this.throttledResize = throttle((l, t, w, h) =>
-      this.$emit('update:size', { x: l, y: t, width: w, height: h }), 50)
+    // this.throttledResize = throttle((l, t, w, h) =>
+    //   this.$emit('update:size', { x: l, y: t, width: w, height: h }), 50)
   },
   methods: {
     // immediate focus when clicking titlebar
@@ -75,14 +75,14 @@ export default defineComponent({
     onDragStop(left, top) {
       this.$emit('update:position', { x: left, y: top })
     },
-    // continuous resize – throttled
-    onResize(left, top, width, height) {
-      this.throttledResize(left, top, width, height)
-    },
-    // final resize end – immediate
-    onResizeStop(left, top, width, height) {
-      this.$emit('update:size', { x: left, y: top, width, height })
-    }
+    // // continuous resize – throttled
+    // onResize(left, top, width, height) {
+    //   this.throttledResize(left, top, width, height)
+    // },
+    // // final resize end – immediate
+    // onResizeStop(left, top, width, height) {
+    //   this.$emit('update:size', { x: left, y: top, width, height })
+    // }
   }
 })
 </script>
@@ -103,9 +103,10 @@ export default defineComponent({
     @activated="onActivated"
     @drag="onDrag"
     @dragstop="onDragStop"
-    @resizing="onResize"
-    @resizestop="onResizeStop"
   >
+  <!-- @resizing="onResize" -->
+  <!-- @resizestop="onResizeStop" -->
+  
     <div class="window-content">
       <!-- TITLEBAR: still lets mousedown through, so drag works here -->
       <div class="titlebar" @mousedown="onFocus">
