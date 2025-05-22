@@ -116,12 +116,12 @@ function disconnectAll() {
 
 /* Header & status */
 .vpn-header {
-  padding: 12px 16px;
+  padding: 1.111vh 1.481vh;
   background: rgba(255, 255, 255, 0.05);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid #44445a;
+  border-bottom: 0.093vh solid #44445a;
 }
 .vpn-header h2 {
   margin: 0;
@@ -130,10 +130,10 @@ function disconnectAll() {
 .status {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 1.111vh;
 }
 .status button {
-  padding: 4px 8px;
+  padding: 4px 0.741vh;
   background: #cf2020;
   border: none;
   border-radius: 4px;
@@ -148,7 +148,7 @@ function disconnectAll() {
 .ip-list {
   flex: 1;
   overflow-y: auto;
-  padding: 16px;
+  padding: 1.481vh;
 }
 .ip-list h3 {
   margin-top: 0;
@@ -160,8 +160,8 @@ function disconnectAll() {
 }
 .ip-list th,
 .ip-list td {
-  padding: 8px;
-  border-bottom: 1px solid #44445a;
+  padding: 0.741vh;
+  border-bottom: 0.093vh solid #44445a;
   text-align: left;
 }
 .ip-list th {
@@ -169,7 +169,7 @@ function disconnectAll() {
 }
 .actions {
   display: flex;
-  gap: 8px;
+  gap: 0.741vh;
 }
 
 /* Buy button */

@@ -50,8 +50,8 @@ onUnmounted(() => {
 <style>
 .grid {
   display: grid;
-  grid-template-columns: repeat(4, 80px);
-  gap: 12px;
-  padding: 16px;
+  grid-template-columns: repeat(4, 7.407vh);
+  gap: 1.111vh;
+  padding: 1.481vh;
 }
 </style>

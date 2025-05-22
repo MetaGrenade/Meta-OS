@@ -250,22 +250,22 @@ function transfer() {
 }
 .cm-header {
   background:#2a2a2a; 
-  padding:12px; 
+  padding:1.111vh; 
   text-align:center;
-  border-bottom:2px solid #444;
+  border-bottom:0.185vh solid #444;
 }
 .cm-header h1 { margin:0; color:#f5a623; }
 
 /* Rig Section */
 .cm-rig {
-  padding:16px; 
+  padding:1.481vh; 
   background:#292929; 
-  border-bottom:1px solid #444;
+  border-bottom:0.093vh solid #444;
 }
-.cm-rig h2 { margin:0 0 8px; color:#f5a623; }
-.add-gpu { display:flex; gap:8px; margin-bottom:8px; }
+.cm-rig h2 { margin:0 0 0.741vh; color:#f5a623; }
+.add-gpu { display:flex; gap:0.741vh; margin-bottom:0.741vh; }
 .add-gpu select, .add-gpu button {
-  padding:6px; border-radius:4px; border:none;
+  padding:0.556vh; border-radius:0.37vh; border:none;
 }
 .add-gpu select { flex:1; }
 .add-gpu button {
@@ -276,73 +276,73 @@ function transfer() {
 .gpu-list { 
   list-style:none; 
   padding:0; 
-  margin:0 0 12px; 
+  margin:0 0 1.111vh; 
 }
 .gpu-list li {
   display:flex; 
   justify-content:space-between; 
-  margin-bottom:4px;
+  margin-bottom:0.37vh;
 }
 .gpu-list button {
   background:#cf1414; 
   color:#fff; 
   border:none; 
-  border-radius:4px;
+  border-radius:0.37vh;
   cursor:pointer;
 }
-.overclock { margin-bottom:12px; }
+.overclock { margin-bottom:1.111vh; }
 .overclock input { width:100%; }
-.rig-stats div { margin-bottom:4px; }
+.rig-stats div { margin-bottom:0.37vh; }
 
 /* Fan */
 .fan-container {
-  display:flex; justify-content:center; margin-top:8px;
+  display:flex; justify-content:center; margin-top:0.741vh;
 }
 .fan {
-  width:64px; height:64px; animation:spin infinite linear;
+  width:5.926vh; height:5.926vh; animation:spin infinite linear;
 }
 @keyframes spin { to { transform:rotate(360deg); } }
 
 /* Market Section */
 .cm-selection {
-  padding:16px; 
+  padding:1.481vh; 
   background:#1f1f1f; 
-  border-bottom:1px solid #444;
+  border-bottom:0.093vh solid #444;
   display:flex; 
-  gap:16px; 
+  gap:1.481vh; 
   flex-wrap:wrap;
 }
 .cm-selection label {
   display:flex; 
   flex-direction:column; 
-  font-size:0.9rem;
+  font-size:1.296vh;
 }
 .cm-selection select {
-  margin-top:4px; 
-  padding:6px; 
+  margin-top:0.37vh; 
+  padding:0.556vh; 
   border:none; 
-  border-radius:4px;
+  border-radius:0.37vh;
 }
-.cm-selection div { margin-top:8px; }
+.cm-selection div { margin-top:0.741vh; }
 
 /* Stats & Balance */
 .cm-stats {
   flex:1; 
-  padding:16px; 
+  padding:1.481vh; 
   display:flex; 
   flex-direction:column;
-  gap:12px;
+  gap:1.111vh;
 }
 .stat { display:flex; justify-content:space-between; }
 .label { font-weight:bold; color:#ccc; }
 .value { font-family:monospace; }
 .progress-bar {
   width:100%; 
-  height:8px; 
+  height:0.741vh; 
   background:#444;
-  border-radius:4px; 
+  border-radius:0.37vh; 
   overflow:hidden; 
-  margin:8px 0;
+  margin:0.741vh 0;
 }
 .progress {
   height:100%; 
@@ -353,12 +353,12 @@ function transfer() {
 .cm-stats button {
   align-self:center; 
   margin-top:auto;
-  padding:8px 16px; 
+  padding:0.741vh 1.481vh; 
   background:#f5a623; 
   border:none;
   color:#1f1f1f; 
   font-weight:bold; 
-  border-radius:4px;
+  border-radius:0.37vh;
   cursor:pointer;
 }
 .cm-stats button:disabled {

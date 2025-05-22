@@ -15,8 +15,8 @@
   height: 100%;
 }
 .dot {
-  width: 8px; height: 8px;
-  margin: 0 4px;
+  width: 0.741vh; height: 0.741vh;
+  margin: 0 0.37vh;
   background: #b014cf;
   border-radius: 50%;
   animation: blink 1s infinite ease-in-out;

@@ -134,16 +134,17 @@ export default defineComponent({
 .window-content {
   display: flex;
   flex-direction: column;
-  width: 100%; height: 100%;
+  width: 100%; 
+  height: 100%;
   background: rgb(39, 20, 52);
-  border: 1px solid #b014cf;
-  box-shadow: 0 0 6px rgba(0,0,0,0.3);
+  border: 0.093vh solid #b014cf;
+  box-shadow: 0 0 0.556vh rgba(0,0,0,0.3);
 }
 /* Only this has the move cursor, and also is your drag-handle */
 .titlebar {
   background: rgba(31, 16, 41, 0.9);;
   align-items: center;
-  padding-left: 10px;
+  padding-left: 0.926vh;
   cursor: move;
   display: flex;
   justify-content: space-between;
@@ -158,13 +159,13 @@ export default defineComponent({
 }
 /* icon styling */
 .titlebar-icon {
-  width: 16px;
-  height: 16px;
-  margin-right: 10px;
+  width: 1.481vh;
+  height: 1.481vh;
+  margin-right: 0.926vh;
 }
 /* ensure the text grows/shrinks nicely */
 .titlebar-title {
-  font-size: 0.9rem;
+  font-size: 1.296vh;
   line-height: 1;
 }
 .content {
@@ -175,7 +176,7 @@ export default defineComponent({
 .controls button {
   background: none;
   border: none;
-  font-size: 1rem;
+  font-size: 1.481vh;
   cursor: pointer;
   color: #fff;
   border-radius: 0;

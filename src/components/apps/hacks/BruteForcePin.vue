@@ -142,17 +142,17 @@ onMounted(resetGame)
   user-select: none;
 }
 .pc-header {
-  padding: 12px;
+  padding: 1.111vh;
   background: #222;
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 1.481vh;
 }
 .heat-gauge {
   flex: 1;
-  height: 16px;
+  height: 1.481vh;
   background: #444;
-  border-radius: 8px;
+  border-radius: 0.741vh;
   overflow: hidden;
 }
 .gauge-fill {
@@ -161,31 +161,31 @@ onMounted(resetGame)
   transition: width 0.3s ease;
 }
 .info {
-  min-width: 120px;
+  min-width: 11.111vh;
   text-align: right;
   font-weight: bold;
 }
 .input-area {
   display: flex;
-  gap: 8px;
-  padding: 16px;
+  gap: 0.741vh;
+  padding: 1.481vh;
   background: #1a1a1a;
 }
 .input-area input {
   flex: 1;
-  padding: 8px;
-  font-size: 1.2rem;
+  padding: 0.741vh;
+  font-size: 1.759vh;
   border: none;
-  border-radius: 4px;
+  border-radius: 0.37vh;
   text-align: center;
   background: #333;
   color: #fff;
 }
 .input-area button {
-  padding: 8px 16px;
+  padding: 0.741vh 1.481vh;
   background: #3498db;
   border: none;
-  border-radius: 4px;
+  border-radius: 0.37vh;
   cursor: pointer;
   color: #fff;
 }
@@ -195,24 +195,24 @@ onMounted(resetGame)
 }
 .history {
   flex: 1;
-  padding: 16px;
+  padding: 1.481vh;
   background: #181818;
   overflow-y: auto;
 }
 .guess-row {
   display: flex;
-  gap: 8px;
-  margin-bottom: 8px;
+  gap: 0.741vh;
+  margin-bottom: 0.741vh;
 }
 .digit {
-  width: 48px;
-  height: 48px;
+  width: 4.444vh;
+  height: 4.444vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.4rem;
+  font-size: 2.037vh;
   font-weight: bold;
-  border-radius: 4px;
+  border-radius: 0.37vh;
   background: #333;
   color: #fff;
 }
@@ -237,20 +237,20 @@ onMounted(resetGame)
 }
 .message {
   background: #222;
-  padding: 24px;
-  border-radius: 6px;
+  padding: 2.222vh;
+  border-radius: 0.556vh;
   text-align: center;
   color: #fff;
 }
 .message h2 {
-  margin-bottom: 16px;
+  margin-bottom: 1.481vh;
   color: #e74c3c;
 }
 .message button {
-  padding: 8px 16px;
+  padding: 0.741vh 1.481vh;
   background: #e74c3c;
   border: none;
-  border-radius: 4px;
+  border-radius: 0.37vh;
   cursor: pointer;
   color: #fff;
 }

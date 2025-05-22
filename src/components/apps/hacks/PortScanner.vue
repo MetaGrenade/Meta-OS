@@ -232,45 +232,45 @@ onMounted(resetGame)
 .ps-header {
   display: flex;
   align-items: center;
-  padding: 12px 16px;
+  padding: 1.111vh 1.481vh;
   background: #292939;
-  gap: 16px;
+  gap: 1.481vh;
 }
 .ps-header h1 { margin: 0; }
 .ps-header button {
-  padding: 6px 12px;
+  padding: 0.556vh 1.111vh;
   background: #5a2c7b;
   border: none;
-  border-radius: 4px;
+  border-radius: 0.37vh;
   cursor: pointer;
 }
 .ps-stats {
   margin-left: auto;
   display: flex;
-  gap: 12px;
+  gap: 1.111vh;
   font-weight: bold;
 }
 .ps-targets {
-  padding: 8px 16px;
+  padding: 0.741vh 1.481vh;
   background: #222;
 }
 .ps-targets h2 {
-  margin: 0 0 4px;
+  margin: 0 0 0.37vh;
   font-size: 0.9rem;
   color: #f5c623;
 }
 .ps-targets ul {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 0.741vh;
   padding: 0;
   margin: 0;
   list-style: none;
 }
 .ps-targets li {
-  padding: 4px 8px;
+  padding: 0.37vh 0.741vh;
   background: #444;
-  border-radius: 4px;
+  border-radius: 0.37vh;
   font-size: 0.85rem;
   transition: background 0.2s;
 }
@@ -285,9 +285,9 @@ onMounted(resetGame)
 .ps-grid {
   flex: 1;
   display: grid;
-  grid-template-columns: repeat(auto-fill,minmax(60px,1fr));
-  gap: 4px;
-  padding: 16px;
+  grid-template-columns: repeat(auto-fill,minmax(5.556vh,1fr));
+  gap: 0.37vh;
+  padding: 1.481vh;
   overflow-y: auto;
 }
 .ps-port {
@@ -295,8 +295,8 @@ onMounted(resetGame)
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 32px;
-  border-radius: 4px;
+  height: 2.963vh;
+  border-radius: 0.37vh;
   background: #444;
   color: #ccc;
   cursor: pointer;
@@ -316,9 +316,9 @@ onMounted(resetGame)
   transform: translateX(-50%);
   background: #222;
   color: #fff;
-  padding: 2px 6px;
-  border-radius: 3px;
-  font-size: 0.75rem;
+  padding: 0.185vh 0.556vh;
+  border-radius: 0.278vh;
+  font-size: 1.111vh;
   white-space: nowrap;
   pointer-events: none;
   z-index: 10;
@@ -329,7 +329,7 @@ onMounted(resetGame)
   top: -0.4em;
   left: 50%;
   transform: translateX(-50%);
-  border: 4px solid transparent;
+  border: 0.37vh solid transparent;
   border-bottom-color: #222;
   pointer-events: none;
   z-index: 10;
@@ -345,19 +345,19 @@ onMounted(resetGame)
 .message {
   background: #222;
   color: #fff;
-  padding: 24px;
-  border-radius: 6px;
+  padding: 2.222vh;
+  border-radius: 0.556vh;
   text-align: center;
 }
 .message h2 {
-  margin-bottom: 12px;
+  margin-bottom: 1.111vh;
 }
 .message button {
-  margin-top: 12px;
-  padding: 8px 16px;
+  margin-top: 1.111vh;
+  padding: 0.741vh 1.481vh;
   background: #5a2c7b;
   border: none;
-  border-radius: 4px;
+  border-radius: 0.37vh;
   cursor: pointer;
 }
 </style>

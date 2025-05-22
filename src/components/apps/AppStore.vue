@@ -288,21 +288,21 @@ function installApp(id) {
 
 <style scoped>
 .app-store {
-  padding: 16px;
+  padding: 1.481vh;
   color: #fff;
   font-family: sans-serif;
 }
 .app-store h2 {
   margin-top: 0;;
-  margin-bottom: 16px;
+  margin-bottom: 1.481vh;
   color: #b014cf;
 }
 
 /* grid of cards */
 .store-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  gap: 16px;
+  grid-template-columns: repeat(auto-fill, minmax(16.667vh, 1fr));
+  gap: 1.481vh;
 }
 
 /* each app card */
@@ -310,41 +310,41 @@ function installApp(id) {
   display: flex;
   flex-direction: column;
   background: #2c2c3a;
-  border: 1px solid #44445a;
-  border-radius: 8px;
-  padding: 12px;
+  border: 0.093vh solid #44445a;
+  border-radius: 0.741vh;
+  padding: 1.111vh;
   text-align: center;
 }
 .card-icon {
-  width: 48px;
-  height: 48px;
-  margin: 0 auto 8px;
+  width: 4.444vh;
+  height: 4.444vh;
+  margin: 0 auto 0.741vh;
 }
 .card-title {
-  margin: 8px 0;
-  font-size: 1.1rem;
+  margin: 0.741vh 0;
+  font-size: 1.574vh;
   color: #fff;
 }
 .card-description {
   flex: 1;
-  font-size: 0.85rem;
+  font-size: 1.204vh;
   color: #ccc;
-  margin-bottom: 12px;
+  margin-bottom: 1.111vh;
 }
 
 /* footer buttons */
 .card-footer {
   display: flex;
-  gap: 8px;
+  gap: 0.741vh;
   justify-content: center;
 }
 .card-footer button {
   flex: 1;
-  padding: 6px;
+  padding: 0.556vh;
   border: none;
-  border-radius: 4px;
+  border-radius: 0.37vh;
   cursor: pointer;
-  font-size: 0.85rem;
+  font-size: 1.204vh;
   transition: background 0.2s;
 }
 .buy-btn {

@@ -142,7 +142,7 @@ onMounted(() => {
 .header {
   background: #c9c9c9;
   color: #1a1a1a;
-  padding: 16px;
+  padding: 1.481vh;
   text-align: center;
   font-size: 1.5rem;
   font-weight: bold;
@@ -158,28 +158,28 @@ onMounted(() => {
 
 /* New Post */
 .li-new-post {
-  padding: 12px 16px;
+  padding: 1.111vh 1.481vh;
   background: #fff;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 0.093vh solid #ddd;
   display: flex;
   flex-direction: column;
   overflow: hidden;
 }
 .li-new-post textarea {
   resize: vertical;
-  padding: 8px;
+  padding: 0.741vh;
   font-size: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  border: 0.093vh solid #ccc;
+  border-radius: 0.37vh;
 }
 .li-new-post button {
   align-self: flex-end;
-  margin-top: 8px;
-  padding: 6px 16px;
+  margin-top: 0.741vh;
+  padding: 0.556vh 1.481vh;
   background: #cf1414;
   color: #fff;
   border: none;
-  border-radius: 4px;
+  border-radius: 0.37vh;
   cursor: pointer;
 }
 .li-new-post button:disabled {
@@ -191,27 +191,27 @@ onMounted(() => {
 .li-feed {
   flex: 1;
   overflow-y: auto;
-  padding: 16px;
+  padding: 1.481vh;
   background: #f0f0f0;
 }
 .li-empty {
   text-align: center;
   color: #777;
-  margin-top: 24px;
+  margin-top: 2.222vh;
 }
 
 /* Individual post */
 .li-post {
   background: #fff;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  padding: 12px;
-  margin-bottom: 12px;
+  border: 0.093vh solid #ddd;
+  border-radius: 0.556vh;
+  padding: 1.111vh;
+  margin-bottom: 1.111vh;
 }
 .li-post-header {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 8px;
+  margin-bottom: 0.741vh;
 }
 .author {
   color: #cf1414;
@@ -224,7 +224,7 @@ onMounted(() => {
   color: #777;
 }
 .content {
-  margin: 0 0 8px;
+  margin: 0 0 0.741vh;
   line-height: 1.4;
 }
 
@@ -232,18 +232,18 @@ onMounted(() => {
 .li-media {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 0.741vh;
 }
 .post-img {
   max-width: 100%;
-  border-radius: 4px;
+  border-radius: 0.37vh;
 }
 .post-video {
   max-width: 100%;
-  border-radius: 4px;
+  border-radius: 0.37vh;
 }
 .post-emoji {
-  font-size: 2rem;
+  font-size: 2.963vh;
   line-height: 1;
 }
 </style>

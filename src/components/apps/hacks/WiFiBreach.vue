@@ -164,9 +164,9 @@ onMounted(resetGame)
   justify-content: space-between;
   align-items: center;
   background: #282c34;
-  padding: 12px 16px;
+  padding: 1.111vh 1.481vh;
 }
-.wb-header h1 { margin: 0; font-size: 1.2rem; }
+.wb-header h1 { margin: 0; font-size: 1.759vh; }
 .wb-info { font-weight: bold; }
 
 /* Grid */
@@ -174,7 +174,7 @@ onMounted(resetGame)
   flex: 1;
   display: flex;
   flex-direction: column;
-  padding: 16px;
+  padding: 1.481vh;
   box-sizing: border-box;
 }
 .wb-row {
@@ -183,13 +183,13 @@ onMounted(resetGame)
 }
 .wb-node {
   flex: 1;
-  margin: 4px;
-  border-radius: 4px;
+  margin: 0.37vh;
+  border-radius: 0.37vh;
   background: #444;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.5rem;
+  font-size: 2.222vh;
   cursor: pointer;
   position: relative;
   transition: background 0.2s, transform 0.1s;
@@ -198,8 +198,8 @@ onMounted(resetGame)
 .wb-node.locked { background: #333; }
 .wb-node.unlocked { background: #666; }
 .wb-node.firewall { background: #a62c2c; }
-.wb-node.start { box-shadow: 0 0 0 2px #5dade2 inset; }
-.wb-node.current { transform: scale(1.1); box-shadow: 0 0 8px #5dade2; }
+.wb-node.start { box-shadow: 0 0 0 0.185vh #5dade2 inset; }
+.wb-node.current { transform: scale(1.1); box-shadow: 0 0 0.741vh #5dade2; }
 .wb-node.target.breached { background: #27ae60; }
 
 /* Overlay */
@@ -213,23 +213,23 @@ onMounted(resetGame)
 }
 .wb-message {
   background: #222;
-  padding: 24px;
-  border-radius: 6px;
+  padding: 2.222vh;
+  border-radius: 0.556vh;
   text-align: center;
 }
 .wb-message h2 {
-  margin: 0 0 8px;
+  margin: 0 0 0.741vh;
   color: #f39c12;
 }
 .wb-message p {
-  margin: 4px 0;
+  margin: 0.37vh 0;
 }
 .wb-message button {
-  margin-top: 12px;
-  padding: 8px 16px;
+  margin-top: 1.111vh;
+  padding: 0.741vh 1.481vh;
   background: #f39c12;
   border: none;
-  border-radius: 4px;
+  border-radius: 0.37vh;
   cursor: pointer;
   color: #222;
   font-weight: bold;

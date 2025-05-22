@@ -189,7 +189,7 @@ onMounted(() => {
 .ev-header {
   background: #b014cf;
   color: #fff;
-  padding: 12px;
+  padding: 1.111vh;
   text-align: center;
 }
 .ev-header h1 { margin:0; }
@@ -203,7 +203,7 @@ onMounted(() => {
 /* Calendar */
 .cal-section {
   width: 50%;
-  border-right: 1px solid #ddd;
+  border-right: 0.093vh solid #ddd;
   display: flex;
   flex-direction: column;
 }
@@ -211,29 +211,29 @@ onMounted(() => {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 8px;
+  padding: 0.741vh;
   background: #eee;
 }
 .cal-header button {
   background: none;
   border: none;
-  font-size: 1.2rem;
+  font-size: 1.759vh;
   cursor: pointer;
 }
 .cal-grid {
   display: grid;
   grid-template-columns: repeat(7,1fr);
-  grid-auto-rows: 40px;
+  grid-auto-rows: 3.704vh;
   text-align: center;
 }
 .cal-day-label {
   background: #ddd;
-  line-height: 40px;
+  line-height: 3.704vh;
   font-weight: bold;
 }
 .cal-cell {
-  border: 1px solid #eee;
-  line-height: 40px;
+  border: 0.093vh solid #eee;
+  line-height: 3.704vh;
   cursor: pointer;
   position: relative;
 }
@@ -243,13 +243,13 @@ onMounted(() => {
 }
 .cal-cell.has-event::after {
   content: '';
-  width: 8px;
-  height: 8px;
+  width: 0.741vh;
+  height: 0.741vh;
   background: #b014cf;
   border-radius: 50%;
   position: absolute;
-  bottom: 4px;
-  right: 4px;
+  bottom: 0.37vh;
+  right: 0.37vh;
 }
 .cal-cell.selected {
   background: #f0e6f6;
@@ -259,54 +259,54 @@ onMounted(() => {
 /* Events & Form */
 .ev-section {
   width: 50%;
-  padding: 16px;
+  padding: 1.481vh;
   overflow-y: auto;
 }
 .event-list {
   list-style: none;
   padding: 0;
-  margin: 0 0 16px;
+  margin: 0 0 1.481vh;
 }
 .event-item {
   background: #fff;
-  border: 1px solid #ddd;
-  padding: 8px;
-  margin-bottom: 8px;
-  border-radius: 4px;
+  border: 0.093vh solid #ddd;
+  padding: 0.741vh;
+  margin-bottom: 0.741vh;
+  border-radius: 0.37vh;
 }
 .event-item .desc {
-  margin: 4px 0 0;
-  font-size: 0.9rem;
+  margin: 0.37vh 0 0;
+  font-size: 1.296vh;
   color: #555;
 }
 .no-events {
   font-style: italic;
   color: #777;
-  margin-bottom: 16px;
+  margin-bottom: 1.481vh;
 }
 .ev-form {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 0.741vh;
 }
 .ev-form label {
   display: flex;
   flex-direction: column;
-  font-size: 0.9rem;
+  font-size: 1.296vh;
 }
 .ev-form input,
 .ev-form textarea {
-  padding: 6px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  padding: 0.556vh;
+  border: 0.093vh solid #ccc;
+  border-radius: 0.37vh;
 }
 .ev-form button {
   align-self: flex-start;
-  padding: 8px 16px;
+  padding: 0.741vh 1.481vh;
   background: #b014cf;
   color: #fff;
   border: none;
-  border-radius: 4px;
+  border-radius: 0.37vh;
   cursor: pointer;
 }
 .ev-form button:hover {

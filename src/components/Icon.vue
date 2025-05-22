@@ -25,23 +25,23 @@ const emit = defineEmits(['click','dblclick'])
     text-align: center; 
     cursor: pointer; 
     user-select: none; 
-    padding: 2px; 
-    border-radius: 1px;
+    padding: 0.185vh; 
+    border-radius: 0.093vh;
     /* transition: background 0.2s, border 0.2s;  */
-    border: 1px solid transparent;
+    border: 0.093vh solid transparent;
 }
 .icon img { 
-  width: 48px; 
-  height: 48px; 
+  width: 4.444vh; 
+  height: 4.444vh; 
 }
 .label { 
   font-size: 0.75rem; 
   font-weight: 600; 
-  margin-top: 4px; 
-  text-shadow: 1px 1px #000; 
+  margin-top: 0.37vh; 
+  text-shadow: 0.093vh 0.093vh #000; 
 }
 .icon--focused {
     background: rgba(255, 255, 255, 0.25);
-    border: 1px solid #fff;
+    border: 0.093vh solid #fff;
 }
 </style>

@@ -129,7 +129,7 @@ function transfer() {
 .bank-header {
   background: #003a6d;
   color: #fff;
-  padding: 16px;
+  padding: 1.481vh;
   text-align: center;
 }
 .bank-header h1 {
@@ -137,7 +137,7 @@ function transfer() {
   font-size: 1.8rem;
 }
 .balance {
-  margin-top: 8px;
+  margin-top: 0.741vh;
   font-size: 1.2rem;
 }
 
@@ -146,23 +146,23 @@ function transfer() {
   flex: 1;
   display: flex;
   flex-direction: column;
-  padding: 16px;
+  padding: 1.481vh;
 }
 
 /* Actions */
 .bank-actions {
   display: flex;
-  gap: 16px;
-  margin-bottom: 24px;
+  gap: 1.481vh;
+  margin-bottom: 2.222vh;
   flex-wrap: wrap;
 }
 .action-card {
   background: #fff;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  padding: 12px;
+  border: 0.093vh solid #ccc;
+  border-radius: 0.741vh;
+  padding: 1.111vh;
   flex: 1;
-  min-width: 200px;
+  min-width: 18.519vh;
   display: flex;
   flex-direction: column;
 }
@@ -170,21 +170,21 @@ function transfer() {
   flex: 2;
 }
 .action-card h2 {
-  margin: 0 0 8px;
+  margin: 0 0 0.741vh;
   color: #003a6d;
 }
 .action-card input {
-  margin-bottom: 8px;
-  padding: 8px;
+  margin-bottom: 0.741vh;
+  padding: 0.741vh;
   font-size: 1rem;
-  border: 1px solid #999;
-  border-radius: 4px;
+  border: 0.093vh solid #999;
+  border-radius: 0.37vh;
 }
 .action-card button {
-  padding: 8px;
+  padding: 0.741vh;
   background: #ffd700;
   border: none;
-  border-radius: 4px;
+  border-radius: 0.37vh;
   cursor: pointer;
   font-weight: bold;
   color: #003a6d;
@@ -200,7 +200,7 @@ function transfer() {
   overflow-y: auto;
 }
 .history h2 {
-  margin: 0 0 8px;
+  margin: 0 0 0.741vh;
   color: #003a6d;
 }
 .history table {
@@ -210,8 +210,8 @@ function transfer() {
 }
 .history th,
 .history td {
-  padding: 8px;
-  border-bottom: 1px solid #ccc;
+  padding: 0.741vh;
+  border-bottom: 0.093vh solid #ccc;
   text-align: left;
 }
 .history th {
@@ -226,7 +226,7 @@ function transfer() {
 }
 .no-trans {
   text-align: center;
-  padding: 16px;
+  padding: 1.481vh;
   color: #777;
 }
 </style>

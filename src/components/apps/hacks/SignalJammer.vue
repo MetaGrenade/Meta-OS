@@ -157,33 +157,33 @@ onUnmounted(() => {
   color: #eee;
   font-family: sans-serif;
   height: 100%;
-  padding: 16px;
+  padding: 1.481vh;
   box-sizing: border-box;
 }
 .sj-header {
-  margin-bottom: 8px;
+  margin-bottom: 0.741vh;
 }
 .canvas-container {
   background: #222;
-  padding: 8px;
-  border-radius: 4px;
+  padding: 0.741vh;
+  border-radius: 0.37vh;
 }
 .controls {
-  margin-top: 12px;
+  margin-top: 1.111vh;
   width: 100%;
-  max-width: 400px;
+  max-width: 37.037vh;
 }
 .controls label {
   display: block;
-  font-size: 0.9rem;
+  font-size: 1.296vh;
 }
 .controls input[type="range"] {
   width: 100%;
-  margin-top: 4px;
+  margin-top: 0.37vh;
 }
 .status {
-  margin-top: 8px;
-  font-size: 0.9rem;
+  margin-top: 0.741vh;
+  font-size: 1.296vh;
 }
 .overlay {
   position: absolute;
@@ -195,18 +195,18 @@ onUnmounted(() => {
 }
 .message {
   background: #222;
-  padding: 24px;
+  padding: 2.222vh;
   text-align: center;
-  border: 2px solid #00ff00;
-  border-radius: 8px;
+  border: 0.185vh solid #00ff00;
+  border-radius: 0.741vh;
 }
 .message button {
-  margin-top: 12px;
-  padding: 8px 16px;
+  margin-top: 1.111vh;
+  padding: 0.741vh 1.481vh;
   background: #00ff00;
   color: #111;
   border: none;
-  border-radius: 4px;
+  border-radius: 0.37vh;
   cursor: pointer;
 }
 </style>

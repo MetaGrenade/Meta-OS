@@ -79,8 +79,8 @@ function calculate() {
 .display {
   background: rgba(0, 0, 0, 0.35);
   color: rgb(255, 0, 234);
-  font-size: 2rem;
-  padding: 16px;
+  font-size: 2.963vh;
+  padding: 1.481vh;
   text-align: right;
   user-select: none;
 }
@@ -89,17 +89,17 @@ function calculate() {
 .buttons {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-auto-rows: 60px;
-  gap: 8px;
-  padding: 8px;
+  grid-auto-rows: 5.556vh;
+  gap: 0.741vh;
+  padding: 0.741vh;
 }
 
 /* All buttons */
 button {
   background: rgba(255, 255, 255, 0.05);
   border: none;
-  border-radius: 4px;
-  font-size: 1.2rem;
+  border-radius: 0.37vh;
+  font-size: 1.759vh;
   color: #fff;
   cursor: pointer;
   transition: background 0.2s;

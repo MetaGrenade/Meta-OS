@@ -21,9 +21,9 @@ const content = ref('')
 .notepad textarea {
   flex: 1;
   resize: none;
-  padding: 8px;
-  border-radius: 4px;
+  padding: 0.741vh;
+  border-radius: 0.37vh;
   font-family: monospace;
-  font-size: 1rem;
+  font-size: 1.481vh;
 }
 </style>

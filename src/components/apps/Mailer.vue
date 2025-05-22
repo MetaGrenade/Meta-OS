@@ -202,9 +202,9 @@ onMounted(() => {
 
 /* Sidebar */
 .sidebar {
-  width: 200px;
+  width: 18.519vh;
   background: #382c3a;
-  padding: 8px;
+  padding: 0.741vh;
   display: flex;
   flex-direction: column;
 }
@@ -212,11 +212,11 @@ onMounted(() => {
   background: none;
   border: none;
   color: #ccc;
-  padding: 8px;
-  margin-bottom: 4px;
+  padding: 0.741vh;
+  margin-bottom: 0.37vh;
   text-align: left;
   cursor: pointer;
-  border-radius: 4px;
+  border-radius: 0.37vh;
 }
 .sidebar button.active,
 .sidebar button:hover {
@@ -224,7 +224,7 @@ onMounted(() => {
   color: #fff;
 }
 .compose-btn {
-  margin-bottom: 12px;
+  margin-bottom: 1.111vh;
   background: #5a2c7b !important;
   color: #fff !important;
 }
@@ -236,13 +236,13 @@ onMounted(() => {
   background: #2a1e2e;
 }
 .message-list {
-  width: 250px;
+  width: 23.148vh;
   overflow-y: auto;
   background: #392a3f;
 }
 .message-item {
-  padding: 8px;
-  border-bottom: 1px solid #4a3a4f;
+  padding: 0.741vh;
+  border-bottom: 0.093vh solid #4a3a4f;
   cursor: pointer;
 }
 .message-item.unread .subject { font-weight: bold; }
@@ -258,7 +258,7 @@ onMounted(() => {
 /* Message detail */
 .message-detail {
   flex: 1;
-  padding: 16px;
+  padding: 1.481vh;
   overflow-y: auto;
   background: #33243a;
 }
@@ -269,22 +269,22 @@ onMounted(() => {
   color: #777;
 }
 .message-detail header {
-  border-bottom: 1px solid #55445a;
-  margin-bottom: 12px;
+  border-bottom: 0.093vh solid #55445a;
+  margin-bottom: 1.111vh;
 }
 .message-detail header h2 {
-  margin: 0 0 4px;
+  margin: 0 0 0.37vh;
   color: #fff;
 }
 .message-detail .meta {
-  font-size: 0.9rem;
+  font-size: 1.296vh;
   color: #aaa;
 }
 .message-detail .meta span {
   display: flex;
 }
 .message-detail .body {
-  margin-top: 12px;
+  margin-top: 1.111vh;
   color: #ddd;
 }
 
@@ -299,14 +299,14 @@ onMounted(() => {
 }
 .compose-modal {
   background: #352c3a;
-  width: 500px;
+  width: 46.296vh;
   max-width: 90%;
-  border-radius: 8px;
+  border-radius: 0.741vh;
   overflow: hidden;
 }
 .compose-modal header {
   background: #56445a;
-  padding: 8px;
+  padding: 0.741vh;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -319,24 +319,24 @@ onMounted(() => {
   background: none;
   border: none;
   color: #fff;
-  font-size: 1.2rem;
+  font-size: 1.759vh;
   cursor: pointer;
 }
 .compose-form {
-  padding: 12px;
+  padding: 1.111vh;
   display: flex;
   flex-direction: column;
 }
 .compose-form label {
-  margin-bottom: 8px;
+  margin-bottom: 0.741vh;
   color: #ddd;
 }
 .compose-form input,
 .compose-form textarea {
   width: 100%;
-  padding: 6px;
+  padding: 0.556vh;
   border: none;
-  border-radius: 4px;
+  border-radius: 0.37vh;
   margin-top: 2px;
   background: #4c3a4f;
   color: #fff;
@@ -347,14 +347,14 @@ onMounted(() => {
 .compose-modal footer {
   display: flex;
   justify-content: flex-end;
-  gap: 8px;
-  padding: 8px;
+  gap: 0.741vh;
+  padding: 0.741vh;
   background: #56445a;
 }
 .compose-modal footer button {
-  padding: 6px 12px;
+  padding: 0.556vh 1.111vh;
   border: none;
-  border-radius: 4px;
+  border-radius: 0.37vh;
   cursor: pointer;
 }
 .compose-modal footer button:first-child {

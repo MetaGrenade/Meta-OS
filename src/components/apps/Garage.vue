@@ -146,31 +146,31 @@ function openDetails(v) {
 .ga-header {
   background: #333;
   color: #fff;
-  padding: 12px;
+  padding: 1.111vh;
   text-align: center;
 }
 .ga-controls {
   display: flex;
-  gap: 8px;
-  padding: 8px;
+  gap: 0.741vh;
+  padding: 0.741vh;
   background: #fff;
 }
 .ga-controls input,
 .ga-controls select {
-  padding: 6px;
-  border: 1px solid #aaa;
-  border-radius: 4px;
+  padding: 0.556vh;
+  border: 0.093vh solid #aaa;
+  border-radius: 0.37vh;
 }
 .ga-list {
   flex: 1;
   overflow-y: auto;
-  padding: 0 16px;
+  padding: 0 1.481vh;
 }
 .ga-group {
-  margin-bottom: 24px;
+  margin-bottom: 2.222vh;
 }
 .ga-group h2 {
-  margin-bottom: 8px;
+  margin-bottom: 0.741vh;
   color: #444;
 }
 table {
@@ -179,8 +179,8 @@ table {
 }
 th,
 td {
-  padding: 8px;
-  border: 1px solid #ddd;
+  padding: 0.741vh;
+  border: 0.093vh solid #ddd;
   text-align: left;
 }
 th {
@@ -207,23 +207,23 @@ td.in-garage {
 }
 .modal {
   background: #fff;
-  padding: 16px;
-  border-radius: 6px;
-  width: 280px;
+  padding: 1.481vh;
+  border-radius: 0.556vh;
+  width: 25.926vh;
 }
 .modal h3 {
   margin-top: 0;
 }
 .modal ul {
-  padding-left: 1rem;
+  padding-left: 1.481vh;
 }
 .modal button {
-  margin-top: 12px;
-  padding: 6px 12px;
+  margin-top: 1.111vh;
+  padding: 0.556vh 1.111vh;
   background: #007bff;
   color: #fff;
   border: none;
-  border-radius: 4px;
+  border-radius: 0.37vh;
   cursor: pointer;
 }
 </style>

@@ -78,7 +78,7 @@ function goForward() {
 // derive current URL & component
 const currentUrl           = computed(() => history.value[historyIndex.value])
 const currentPageComponent = computed(() => pages[currentUrl.value] || {
-  template: `<div style="padding:24px; color:#900;">404 Page not found: {{ url }}</div>`,
+  template: `<div style="padding:2.222vh; color:#900;">404 Page not found: {{ url }}</div>`,
   props: ['url'],
   setup() { return { url: currentUrl.value } }
 })
@@ -111,7 +111,7 @@ const currentPageComponent = computed(() => pages[currentUrl.value] || {
   display: flex;
   flex-direction: column;
   height: 100%;
-  /* border: 1px solid #666; */
+  /* border: 0.093vh solid #666; */
 }
 
 /* toolbar */
@@ -119,14 +119,14 @@ const currentPageComponent = computed(() => pages[currentUrl.value] || {
   display: flex;
   align-items: center;
   background: rgba(56, 29, 75, 0.9);
-  padding: 4px;
-  gap: 4px;
+  padding: 0.37vh;
+  gap: 0.37vh;
 }
 .address-bar {
   flex: 1;
-  padding: 4px 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  padding: 0.37vh 0.741vh;
+  border: 0.093vh solid #ccc;
+  border-radius: 0.37vh;
 }
 
 /* content area */

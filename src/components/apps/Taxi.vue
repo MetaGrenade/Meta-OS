@@ -129,38 +129,38 @@ function completeRide(id) {
 /* Role toggle */
 .role-switch {
   display: flex;
-  gap: 1rem;
-  padding: 8px 16px;
+  gap: 1.481vh;
+  padding: 0.741vh 1.481vh;
   background: #ddd;
 }
 .role-switch label {
   cursor: pointer;
 }
 .role-switch input {
-  margin-right: 4px;
+  margin-right: 0.37vh;
 }
 
 /* PASSENGER */
 .passenger-view {
   flex: 1;
-  padding: 16px;
+  padding: 1.481vh;
 }
 .passenger-view form {
   display: flex;
-  gap: 8px;
-  margin-bottom: 16px;
+  gap: 0.741vh;
+  margin-bottom: 1.481vh;
 }
 .passenger-view input {
   flex: 1;
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  padding: 0.741vh;
+  border: 0.093vh solid #ccc;
+  border-radius: 0.37vh;
 }
 .passenger-view button {
-  padding: 8px 16px;
+  padding: 0.741vh 1.481vh;
   background: #007bff;
   color: #fff;
-  border: none; border-radius: 4px;
+  border: none; border-radius: 0.37vh;
   cursor: pointer;
 }
 .passenger-view button:disabled {
@@ -168,38 +168,38 @@ function completeRide(id) {
   cursor: default;
 }
 .my-request {
-  padding: 12px;
+  padding: 1.111vh;
   background: #fff;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  border: 0.093vh solid #ccc;
+  border-radius: 0.37vh;
 }
 
 /* DRIVER */
 .driver-view {
   flex: 1;
-  padding: 16px;
+  padding: 1.481vh;
 }
 .requests-list,
 .accepted-list {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 1.111vh;
 }
 .request-card {
-  padding: 12px;
+  padding: 1.111vh;
   background: #fff;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  border: 0.093vh solid #ccc;
+  border-radius: 0.37vh;
 }
 .request-card.accepted {
   border-color: #28a745;
 }
 .request-card button {
-  margin-top: 8px;
-  padding: 6px 12px;
+  margin-top: 0.741vh;
+  padding: 0.556vh 1.111vh;
   background: #28a745;
   color: #fff;
-  border: none; border-radius: 4px;
+  border: none; border-radius: 0.37vh;
   cursor: pointer;
 }
 .request-card.accepted button {

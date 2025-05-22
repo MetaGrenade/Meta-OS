@@ -96,7 +96,7 @@ onUnmounted(() => {
   bottom: 0;
   left: 0;
   right: 0;
-  height: 50px;
+  height: 4.63vh;
   background: rgba(31, 16, 41, 0.9);
   display: flex;
   align-items: center;
@@ -105,16 +105,16 @@ onUnmounted(() => {
 
 /* START BUTTON */
 .start-button {
-  width: 50px;
-  height: 50px;
+  width: 4.63vh;
+  height: 4.63vh;
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
 }
 .start-button img {
-  width: 30px;
-  height: 30px;
+  width: 2.778vh;
+  height: 2.778vh;
 }
 .start-button:hover {
   background: #b014cf;
@@ -126,14 +126,14 @@ onUnmounted(() => {
 /* START MENU POPUP */
 .start-menu {
   position: absolute;
-  bottom: 50px;  /* sits right above the task bar */
-  left: 0px;     /* aligns with the start button */
+  bottom: 4.63vh;  /* sits right above the task bar */
+  left: 0;     /* aligns with the start button */
   background: rgba(31, 16, 41, 0.9);
   border: 1px solid #b014cf;
   overflow: hidden;
   z-index: 1000;
-  height: 250px;
-  width: 200px;
+  height: 24.63vh;
+  width: 18.519vh;
 }
 .start-menu ul {
   position: absolute;
@@ -142,10 +142,10 @@ onUnmounted(() => {
   left: 0;
   list-style: none;
   margin: 0;
-  padding: 8px 0;
+  padding: 0.741vh 0;
 }
 .start-menu li {
-  padding: 8px 16px;
+  padding: 0.741vh 1.481vh;
   cursor: pointer;
   white-space: nowrap;
   text-align: left;
@@ -158,13 +158,13 @@ onUnmounted(() => {
 .task-items {
   display: flex;
   align-items: center;
-  margin-left: 16px; /* space after start button */
+  margin-left: 1.481vh; /* space after start button */
 }
 .task-item {
-  margin-right: 8px;
-  padding: 4px 8px;
+  margin-right: 0.741vh;
+  padding: 0.37vh 0.741vh;
   background: rgba(255,255,255,0.1);
-  border-radius: 4px;
+  border-radius: 0.37vh;
   cursor: pointer;
   color: #fff;
   font-size: 0.85rem;
@@ -176,7 +176,7 @@ onUnmounted(() => {
 /* CLOCK */
 .task-clock {
   margin-left: auto;
-  padding: 0 12px;
+  padding: 0 1.111vh;
   white-space: nowrap;
 }
 </style>

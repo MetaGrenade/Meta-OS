@@ -241,7 +241,7 @@ const liveAuctions = computed(() => {
 }
 .tabs button {
   flex: 1;
-  padding: 8px;
+  padding: 0.741vh;
   background: none;
   border: none;
   cursor: pointer;
@@ -249,72 +249,72 @@ const liveAuctions = computed(() => {
 }
 .tabs button.active {
   background: #fff;
-  border-bottom: 2px solid #007bff;
+  border-bottom: 0.185vh solid #007bff;
 }
 .tab-content {
   flex: 1;
   overflow-y: auto;
-  padding: 16px;
+  padding: 1.481vh;
 }
 
 /* Post forms */
 .post-form {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  margin-bottom: 16px;
+  gap: 0.741vh;
+  margin-bottom: 1.481vh;
 }
 .post-form input,
 .post-form textarea {
-  padding: 8px;
-  border: 1px solid #aaa;
-  border-radius: 4px;
+  padding: 0.741vh;
+  border: 0.093vh solid #aaa;
+  border-radius: 0.37vh;
 }
 .post-form button {
   align-self: flex-start;
-  padding: 8px 16px;
+  padding: 0.741vh 1.481vh;
   background: #007bff;
   color: #fff;
   border: none;
-  border-radius: 4px;
+  border-radius: 0.37vh;
   cursor: pointer;
 }
 
 /* Listings grid */
 .listings {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 16px;
+  grid-template-columns: repeat(auto-fill, minmax(20.37vh, 1fr));
+  gap: 1.481vh;
 }
 .card {
   background: #fff;
-  padding: 12px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
+  padding: 1.111vh;
+  border: 0.093vh solid #ccc;
+  border-radius: 0.556vh;
   display: flex;
   flex-direction: column;
 }
 .card h3 {
-  margin: 0 0 4px;
+  margin: 0 0 0.37vh;
 }
 .desc {
   flex: 1;
-  font-size: 0.9rem;
-  margin-bottom: 8px;
+  font-size: 1.296vh;
+  margin-bottom: 0.741vh;
 }
 .meta {
-  font-size: 0.85rem;
+  font-size: 1.111vh;
   color: #555;
   display: flex;
   justify-content: space-between;
-  margin-bottom: 8px;
+  margin-bottom: 0.741vh;
 }
 .card button {
-  padding: 6px 12px;
+  padding: 0.556vh 1.111vh;
   background: #28a745;
   color: #fff;
   border: none;
-  border-radius: 4px;
+  border-radius: 0.37vh;
   cursor: pointer;
 }
 .card button:disabled {
@@ -328,13 +328,13 @@ const liveAuctions = computed(() => {
 }
 .bid-row {
   display: flex;
-  gap: 4px;
+  gap: 0.37vh;
 }
 .bid-row input {
   flex: 1;
-  padding: 6px;
-  border: 1px solid #aaa;
-  border-radius: 4px;
+  padding: 0.556vh;
+  border: 0.093vh solid #aaa;
+  border-radius: 0.37vh;
 }
 .bid-row button {
   background: #ffc107;

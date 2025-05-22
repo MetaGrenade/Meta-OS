@@ -98,12 +98,12 @@ function formatPrice(val) {
 .header {
   background: #209950;
   color: #1a1a1a;
-  padding: 16px;
+  padding: 1.481vh;
   text-align: center;
-  font-size: 1.5rem;
+  font-size: 2.222vh;
   font-weight: bold;
-  border-bottom: 2px solid #209950;
-  max-height: 100px;
+  border-bottom: 0.185vh solid #209950;
+  max-height: 9.259vh;
 }
 
 .header img {
@@ -117,74 +117,74 @@ function formatPrice(val) {
 .property-grid {
   flex: 1;
   overflow-y: auto;
-  padding: 16px;
+  padding: 1.481vh;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap: 16px;
+  grid-template-columns: repeat(auto-fill, minmax(22.222vh, 1fr));
+  gap: 1.481vh;
 }
 
 .property-card {
   background: #fff;
   border: 1px solid #ddd;
-  border-radius: 8px;
+  border-radius: 0.741vh;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  box-shadow: 0 0.185vh 0.37vh rgba(0,0,0,0.1);
 }
 
 .property-image {
   width: 100%;
-  height: 160px;
+  height: 14.815vh;
   object-fit: cover;
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
+  border-top-left-radius: 0.741vh;
+  border-top-right-radius: 0.741vh;
 }
 
 .property-info {
   flex: 1;
-  padding: 12px;
+  padding: 1.111vh;
   display: flex;
   flex-direction: column;
 }
 
 .property-name {
   margin: 0;
-  font-size: 1.1rem;
+  font-size: 1.574vh;
   color: #1a1a1a;
 }
 
 .property-type {
   display: inline-block;
-  margin: 8px 0 4px;
-  padding: 2px 6px;
+  margin: 0.741vh 0 0.37vh;
+  padding: 0.185vh 0.556vh;
   background: #1a1a1a;
   color: #ffd700;
-  font-size: 0.75rem;
-  border-radius: 4px;
+  font-size: 1.111vh;
+  border-radius: 0.37vh;
 }
 
 .property-location {
-  font-size: 0.85rem;
+  font-size: 1.204vh;
   color: #555;
-  margin-bottom: 8px;
+  margin-bottom: 0.741vh;
 }
 
 .property-price {
-  font-size: 1.1rem;
+  font-size: 1.574vh;
   font-weight: bold;
   margin-top: auto;
   color: #209950;
 }
 
 .details-btn {
-  margin-top: 12px;
-  padding: 8px;
+  margin-top: 1.111vh;
+  padding: 0.741vh;
   background: #ffd700;
   color: #1a1a1a;
   border: none;
-  border-radius: 4px;
+  border-radius: 0.37vh;
   cursor: pointer;
-  font-size: 0.9rem;
+  font-size: 1.296vh;
   transition: filter 0.2s;
 }
 

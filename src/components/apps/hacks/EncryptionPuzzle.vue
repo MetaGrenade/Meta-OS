@@ -131,7 +131,7 @@ onMounted(resetGame)
   display: flex;
   flex-direction: column;
   height: 100%;
-  padding: 16px;
+  padding: 1.481vh;
   box-sizing: border-box;
   font-family: sans-serif;
   color: #222;
@@ -139,25 +139,25 @@ onMounted(resetGame)
   user-select: none;
 }
 section {
-  margin-bottom: 16px;
+  margin-bottom: 1.481vh;
 }
 h2 {
-  margin: 0 0 8px;
-  font-size: 1rem;
+  margin: 0 0 0.741vh;
+  font-size: 1.481vh;
   color: #444;
 }
 textarea {
   width: 100%;
   resize: none;
   font-family: monospace;
-  font-size: 1.2rem;
-  padding: 8px;
+  font-size: 1.759vh;
+  padding: 0.741vh;
   box-sizing: border-box;
 }
 .mapping-grid {
   display: grid;
   grid-template-columns: repeat(13, 1fr);
-  gap: 4px;
+  gap: 0.37vh;
 }
 .map-cell {
   display: flex;
@@ -166,24 +166,24 @@ textarea {
 }
 .map-cell label {
   font-size: 0.75rem;
-  margin-bottom: 2px;
+  margin-bottom: 0.185vh;
 }
 .map-cell input {
-  width: 32px;
-  height: 32px;
+  width: 2.963vh;
+  height: 2.963vh;
   text-align: center;
-  font-size: 1rem;
+  font-size: 1.481vh;
   text-transform: uppercase;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  border: 0.093vh solid #ccc;
+  border-radius: 0.37vh;
 }
 .decoded {
   font-family: monospace;
-  font-size: 1.4rem;
-  padding: 8px;
+  font-size: 2.037vh;
+  padding: 0.741vh;
   background: #eaeaea;
-  border-radius: 4px;
-  min-height: 2em;
+  border-radius: 0.37vh;
+  min-height: 2.963vh;
 }
 
 /* Win overlay */
@@ -198,23 +198,23 @@ textarea {
 .message {
   text-align: center;
   background: #fff;
-  padding: 24px;
-  border: 2px solid #4caf50;
-  border-radius: 8px;
+  padding: 2.222vh;
+  border: 0.185vh solid #4caf50;
+  border-radius: 0.741vh;
 }
 .message strong {
   display: block;
-  margin: 8px 0;
-  font-size: 1.2rem;
+  margin: 0.741vh 0;
+  font-size: 1.759vh;
   color: #4caf50;
 }
 .message button {
-  margin-top: 12px;
-  padding: 8px 16px;
+  margin-top: 1.111vh;
+  padding: 0.741vh 1.481vh;
   background: #4caf50;
   color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: 0.37vh;
   cursor: pointer;
 }
 </style>

@@ -22,19 +22,19 @@ const files = ref([
 
 <style scoped>
 .file-explorer {
-  padding: 8px;
+  padding: 0.741vh;
   font-family: sans-serif;
 }
 .file-explorer h2 {
-  margin-bottom: 8px;
-  font-size: 1.25rem;
+  margin-bottom: 0.741vh;
+  font-size: 0.37vh;
 }
 .file-explorer ul {
   list-style: none;
   padding: 0;
 }
 .file-explorer li {
-  padding: 4px 0;
+  padding: 0.37vh 0;
   cursor: default;
 }
 .file-explorer li:hover {

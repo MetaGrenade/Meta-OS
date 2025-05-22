@@ -26,20 +26,20 @@ body {
   margin: 0;
   display: flex;
   place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  height: 100vh;
+  width: 100vw;
 }
 
 h1 {
-  font-size: 3.2em;
+  font-size: 4.444vh;
   line-height: 1.1;
 }
 
 button {
-  border-radius: 8px;
-  border: 1px solid transparent;
+  border-radius: 0.741vh;
+  border: 0.093vh solid transparent;
   padding: 0.6em 1.2em;
-  font-size: 1em;
+  font-size: 1.481vh;
   font-weight: 500;
   font-family: inherit;
   background-color: #1a1a1a;
@@ -51,17 +51,17 @@ button:hover {
 }
 button:focus,
 button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  outline: 0.37vh auto -webkit-focus-ring-color;
 }
 
 .card {
-  padding: 2em;
+  padding: 2.963vh;
 }
 
 #app {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 2.963vh;
   text-align: center;
 }
 
