@@ -8,22 +8,10 @@ import { apps } from '@/apps.js'
 import { useWindowManager } from '@/composables/useWindowManager'
 
 /** -- DESKTOP VISIBILITY & NUI WIRING -- */
-const visible = ref(true)
+const visible = ref(false)
 
 function openDesktop() {
   visible.value = true
-}
-
-function closeDesktop() {
-  // Hide immediately on the UI side
-  visible.value = false
-  window.postMessage({ action: 'desktop:close' }, '*')
-  // Tell Lua we're closing (matches your RegisterNUICallback)
-  fetch(`https://${GetParentResourceName()}/desktop:close`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({})
-  })
 }
 
 onMounted(() => {
@@ -92,16 +80,6 @@ function handleTaskToggle(id) {
 
     <!-- Taskbar -->
     <Taskbar :windows="windows" @taskToggle="handleTaskToggle" />
-
-    <!-- A little “Close Desktop” button in the corner -->
-    <button
-      v-if="visible"
-      @click="closeDesktop"
-      class="desktop-close-btn"
-      aria-label="Close Desktop"
-    >
-      ✕
-    </button>
   </div>
 </template>
 
@@ -114,20 +92,5 @@ function handleTaskToggle(id) {
   background-size: cover;
   background-color: transparent;
   z-index: 0;
-}
-
-/* Optional: style for your “close desktop” control */
-.desktop-close-btn {
-  position: absolute;
-  top: 0.741vh;
-  right: 0.741vh;
-  background: rgba(0,0,0,0.5);
-  color: #fff;
-  border: none;
-  font-size: 1.759vh;
-  padding: 0.37vh 0.741vh;
-  border-radius: 0.37vh;
-  cursor: pointer;
-  z-index: 2000;
 }
 </style>

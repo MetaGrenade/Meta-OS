@@ -4,7 +4,7 @@ export const apps = [
     { 
         id: 'appstore',
         name: 'App Store',
-        icon: '/img/icons/apps/shop.png',
+        icon: './img/icons/apps/shop.png',
         component: markRaw(defineAsyncComponent(() =>
             import('./components/apps/AppStore.vue')
         ))
@@ -12,7 +12,7 @@ export const apps = [
     { 
         id: 'files',
         name: 'Files',
-        icon: '/img/icons/apps/files.png',
+        icon: './img/icons/apps/files.png',
         defaultWidth: 400,
         defaultHeight: 450,
         component: markRaw(defineAsyncComponent(() =>
@@ -22,7 +22,7 @@ export const apps = [
     {
         id: 'email',
         name: 'M@iler',
-        icon: '/img/icons/apps/email.png',
+        icon: './img/icons/apps/email.png',
         component: markRaw(defineAsyncComponent(() =>
             import('./components/apps/Mailer.vue')
         ))
@@ -30,7 +30,7 @@ export const apps = [
     {
         id: 'browser',
         name: 'Web Browser',
-        icon: '/img/icons/apps/browser2.png',
+        icon: './img/icons/apps/browser2.png',
         component: markRaw(defineAsyncComponent(() =>
             import('./components/apps/Browser.vue')
         )), 
@@ -38,7 +38,7 @@ export const apps = [
     {
         id: 'calculator',
         name: 'Calculator',
-        icon: '/img/icons/apps/calculator.png',
+        icon: './img/icons/apps/calculator.png',
         component: markRaw(defineAsyncComponent(() =>
             import('./components/apps/Calculator.vue')
         )), defaultWidth: 300, defaultHeight: 550 
@@ -46,7 +46,7 @@ export const apps = [
     {
         id: 'notes',
         name: 'Notepad',
-        icon: '/img/icons/apps/notepad.png',
+        icon: './img/icons/apps/notepad.png',
         component: markRaw(defineAsyncComponent(() =>
             import('./components/apps/Notepad.vue')
         )), 
@@ -56,7 +56,7 @@ export const apps = [
     {
         id: 'lifeinvader',
         name: 'LifeInvader',
-        icon: '/img/icons/apps/lifeinvader.png',
+        icon: './img/icons/apps/lifeinvader.png',
         component: markRaw(defineAsyncComponent(() =>
             import('./components/apps/LifeInvader.vue')
         )), defaultWidth: 400, defaultHeight: 800 
@@ -64,7 +64,7 @@ export const apps = [
     {
         id: 'dynasty8',
         name: 'Dynasty 8',
-        icon: '/img/icons/apps/dynasty8.png',
+        icon: './img/icons/apps/dynasty8.png',
         component: markRaw(defineAsyncComponent(() =>
             import('./components/apps/Dynasty8.vue')
         )) 
@@ -72,7 +72,7 @@ export const apps = [
     {
         id: 'vpn',
         name: 'Turd VPN',
-        icon: '/img/icons/apps/vpn.png',
+        icon: './img/icons/apps/vpn.png',
         component: markRaw(defineAsyncComponent(() =>
             import('./components/apps/Vpn.vue')
         )), 
@@ -82,7 +82,7 @@ export const apps = [
     {
         id: 'taxi',
         name: 'Goober Taxi',
-        icon: '/img/icons/apps/taxi.png',
+        icon: './img/icons/apps/taxi.png',
         component: markRaw(defineAsyncComponent(() =>
             import('./components/apps/Taxi.vue')
         ))
@@ -90,7 +90,7 @@ export const apps = [
     {
         id: 'bank',
         name: 'Maze Bank',
-        icon: '/img/icons/apps/bank.png',
+        icon: './img/icons/apps/bank.png',
         component: markRaw(defineAsyncComponent(() =>
             import('./components/apps/Bank.vue')
         ))
@@ -98,7 +98,7 @@ export const apps = [
     {
         id: 'crypto',
         name: 'Crypto Miner',
-        icon: '/img/icons/apps/crypto.png',
+        icon: './img/icons/apps/crypto.png',
         component: markRaw(defineAsyncComponent(() =>
             import('./components/apps/CryptoMiner.vue')
         ))
@@ -106,7 +106,7 @@ export const apps = [
     {
         id: 'clicker',
         name: 'Donut Dash',
-        icon: '/img/icons/apps/games/clicker.png',
+        icon: './img/icons/apps/games/clicker.png',
         component: markRaw(defineAsyncComponent(() =>
             import('./components/apps/games/clicker/DonutDash.vue')
         ))
@@ -114,7 +114,7 @@ export const apps = [
     {
         id: 'garage',
         name: 'Garage',
-        icon: '/img/icons/apps/garage.png',
+        icon: './img/icons/apps/garage.png',
         component: markRaw(defineAsyncComponent(() =>
             import('./components/apps/Garage.vue')
         )),
@@ -124,7 +124,7 @@ export const apps = [
     {
         id: 'market',
         name: 'Market',
-        icon: '/img/icons/apps/market.png',
+        icon: './img/icons/apps/market.png',
         component: markRaw(defineAsyncComponent(() =>
             import('./components/apps/Market.vue')
         ))
@@ -132,7 +132,7 @@ export const apps = [
     {
         id: 'events',
         name: 'Events',
-        icon: '/img/icons/apps/events.png',
+        icon: './img/icons/apps/events.png',
         component: markRaw(defineAsyncComponent(() =>
             import('./components/apps/Events.vue')
         ))
@@ -140,7 +140,7 @@ export const apps = [
     {
         id: 'reaction',
         name: 'Reaction Test',
-        icon: '/img/icons/apps/games/reaction.png',
+        icon: './img/icons/apps/games/reaction.png',
         component: markRaw(defineAsyncComponent(() =>
             import('./components/apps/games/reaction/ReactionTester.vue')
         )),
@@ -150,7 +150,7 @@ export const apps = [
     {
         id: 'memory',
         name: 'Memory Match',
-        icon: '/img/icons/apps/games/memory.png', 
+        icon: './img/icons/apps/games/memory.png', 
         component: markRaw(defineAsyncComponent(() =>
             import('./components/apps/games/memory/MemoryMatch.vue')
         )), 
@@ -160,7 +160,7 @@ export const apps = [
     {
         id: 'slots',
         name: 'Slot Machine',
-        icon: '/img/icons/apps/games/slots.png', 
+        icon: './img/icons/apps/games/slots.png', 
         component: markRaw(defineAsyncComponent(() =>
             import('./components/apps/games/gamba/SlotMachine.vue')
         )), 
@@ -170,7 +170,7 @@ export const apps = [
     {
         id: 'tictactoe',
         name: 'Tick Tac Toe',
-        icon: '/img/icons/apps/games/tictactoe.png',
+        icon: './img/icons/apps/games/tictactoe.png',
         component: markRaw(defineAsyncComponent(() =>
             import('./components/apps/games/skill/TicTacToe.vue')
         )),
@@ -180,7 +180,7 @@ export const apps = [
     {
         id: '2048game',
         name: '2048 Game',
-        icon: '/img/icons/apps/games/2048game.png',
+        icon: './img/icons/apps/games/2048game.png',
         component: markRaw(defineAsyncComponent(() =>
             import('./components/apps/games/puzzle/Game2048.vue')
         )),
@@ -190,7 +190,7 @@ export const apps = [
     {
         id: 'whackamole',
         name: 'Whack-A-Mole',
-        icon: '/img/icons/apps/games/whackamole.png',
+        icon: './img/icons/apps/games/whackamole.png',
         component: markRaw(defineAsyncComponent(() =>
             import('./components/apps/games/skill/WhackAMole.vue')
         )),
@@ -200,7 +200,7 @@ export const apps = [
     {
         id: 'wifibreach',
         name: 'Wifi Breacher',
-        icon: '/img/icons/apps/hacks/wifibreach.png',
+        icon: './img/icons/apps/hacks/wifibreach.png',
         component: markRaw(defineAsyncComponent(() =>
             import('./components/apps/hacks/WiFiBreach.vue')
         ))
@@ -208,7 +208,7 @@ export const apps = [
     {
         id: 'bruteforcepin',
         name: 'Pin Cracker',
-        icon: '/img/icons/apps/hacks/bruteforcepin.png',
+        icon: './img/icons/apps/hacks/bruteforcepin.png',
         component: markRaw(defineAsyncComponent(() =>
             import('./components/apps/hacks/BruteForcePin.vue')
         )),
@@ -218,7 +218,7 @@ export const apps = [
     {
         id: 'encryptionpuzzle',
         name: 'Encrypt',
-        icon: '/img/icons/apps/hacks/encryptionpuzzle.png',
+        icon: './img/icons/apps/hacks/encryptionpuzzle.png',
         component: markRaw(defineAsyncComponent(() =>
             import('./components/apps/hacks/EncryptionPuzzle.vue')
         )),
@@ -228,7 +228,7 @@ export const apps = [
     {
         id: 'signaljammer',
         name: 'Signal Jammer',
-        icon: '/img/icons/apps/hacks/signaljammer.png',
+        icon: './img/icons/apps/hacks/signaljammer.png',
         component: markRaw(defineAsyncComponent(() =>
             import('./components/apps/hacks/SignalJammer.vue')
         ))
@@ -236,7 +236,7 @@ export const apps = [
     {
         id: 'portscanner',
         name: 'Port Scanner',
-        icon: '/img/icons/apps/hacks/portscanner.png',
+        icon: './img/icons/apps/hacks/portscanner.png',
         component: markRaw(defineAsyncComponent(() =>
             import('./components/apps/hacks/PortScanner.vue')
         ))

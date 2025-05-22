@@ -36,6 +36,18 @@ function onClickOutside(e) {
   }
 }
 
+// call your NUI callback and let Lua send back the close message
+function closeDesktop() {
+  // hide the menu immediately
+  startMenuOpen.value = false
+  // invoke the Lua NUI callback
+  fetch(`https://${GetParentResourceName()}/desktop:close`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({})
+  })
+}
+
 onMounted(() => {
   document.addEventListener('click', onClickOutside)
   watch(tick, () => {
@@ -67,7 +79,7 @@ onUnmounted(() => {
         <li>Documents</li>
         <li>Photos</li>
         <li>Settings</li>
-        <li>Power</li>
+        <li @click="closeDesktop">Power</li>
       </ul>
     </div>
 
@@ -129,7 +141,7 @@ onUnmounted(() => {
   bottom: 4.63vh;  /* sits right above the task bar */
   left: 0;     /* aligns with the start button */
   background: rgba(31, 16, 41, 0.9);
-  border: 1px solid #b014cf;
+  border: 0.093vh solid #b014cf;
   overflow: hidden;
   z-index: 1000;
   height: 24.63vh;
@@ -149,6 +161,7 @@ onUnmounted(() => {
   cursor: pointer;
   white-space: nowrap;
   text-align: left;
+  font-size: 1.204vh;
 }
 .start-menu li:hover {
   background: rgba(176, 20, 207,0.20);
@@ -167,7 +180,7 @@ onUnmounted(() => {
   border-radius: 0.37vh;
   cursor: pointer;
   color: #fff;
-  font-size: 0.85rem;
+  font-size: 1.204vh;
 }
 .task-item:hover {
   background: rgba(255,255,255,0.2);
@@ -178,5 +191,6 @@ onUnmounted(() => {
   margin-left: auto;
   padding: 0 1.111vh;
   white-space: nowrap;
+  font-size: 1.204vh;
 }
 </style>

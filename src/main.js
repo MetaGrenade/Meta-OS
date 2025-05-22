@@ -17,7 +17,7 @@ function setUIVisible(on) {
   const disp = on ? 'flex' : 'none'
   document.documentElement.style.display = disp
   document.body.style.display = disp
-  // app.config.globalProperties.$openDesktop()
+  //   app.config.globalProperties.$openDesktop()
 }
 
 // NUI messages from Lua
